@@ -1,0 +1,172 @@
+/* Réinitialiser les marges et les paddings */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+/*police et couleur principale des textes*/
+body{
+    font-family:"Poppins", sans-serif;
+    color:black;
+}
+/*Largeur maximale des éléments et centrage du container*/
+.container{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+/*toutes les class text-center sont centrées*/
+.text-center{
+    text-align: center;
+}
+/*display flex sur toutes les row et passage d'un élément en dessous quand la largeur dépasse 100%*/
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+/*on définit l'espace occupé par chaque colonne des classes .col*/
+
+.col-25{
+    width:25%;
+}    
+.col-33{
+    width:33%;
+}
+.col-50{
+    width: 50%;
+}
+.col-100{
+    width:100%;
+}
+/*les marges*/
+.mt-200{
+    margin-top: 200px;
+}
+.mt-100{
+    margin-top: 100px;
+}
+.mt-75{
+    margin-top: 75px;
+}
+.mt-50{
+    margin-top: 50px;
+}
+.mt-25{
+    margin-top: 25px;
+}
+
+/*on définit taille des titres*/
+h1{
+    font-size: 42px;
+}
+h2{
+    font-size: 32px;
+}
+h3{
+    font-size: 24px;
+}
+h4{
+    font-size: 16px;
+}
+
+/*La barre de navigation*/
+
+.navbar{
+    background-color: white;
+    width: 780px;
+    padding: 20px 0;
+    height: 200px;
+}
+.contact{
+    justify-content: space-between;
+}
+/* Style du menu */
+
+.menu ul {
+    list-style: none;/*on retire les points devant les éléments de la liste*/
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Style des liens */
+.menu ul li a {
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    font-weight:600;
+}
+
+/*Page d'accueil*/
+
+.container-accueil{
+    height: 600px;
+    background-color: #BFFFBF;
+}
+.welcome{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+/* Styles des articles*/
+.bloc-infos{
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.list-infos{
+    list-style: none;
+}
+.infos{
+    width: 334px;
+    height: 352px;
+    background: #BFFFBF;
+    border: 2px solid #000000;
+    border-radius: 25px;
+    justify-content: center;
+    align-items: center;
+}
+.schedule{
+    margin-left: 35px;
+}
+
+.care{
+    margin-right: 35px;
+}
+
+/*photo et bouton rendes-vous*/
+.img-appointment{
+    width: 280px;
+}
+.container-appointment{
+    text-align: center;
+    margin: 0 auto;
+    width: fit-content;
+}
+.photo-dr{
+    width: 280px;
+    height: 330px;
+    border-radius: 25px;
+}
+.appointment{
+    margin-top: 10px;
+}
+.btn-appointment{
+    width: 220px;
+    height: 50px;
+    background-color: #40bfff;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+}
+
+/*footer*/
+.footer{
+    background-color: white;
+    height: 150px;
+    justify-content: space-between;
+    align-items: center;
+}
