@@ -12,24 +12,22 @@
 </head>
 <body>
     <header id="Accueil">
-        <nav class="container navbar text-center">
-            <h1>Cabinet dentaire du docteur Dupont</h1>
-            <div class="contact row mt-25">
-                <p>Adresse : 3 rue du cabinet 33 333 LaVille</p>
-                <p>Téléphone : 02 33 44 55 66</p>
-            </div>
-            <div class="menu text-center mt-25">
-                <ul>
-                    <li><a href="charte.html">Accueil</a></li>
-                    <li><a href="#contact">Soins</a></li>
-                    <li><a href="#contact">A propos</a></li>
-                    <li><a href="#contact">Actualités</a></li>
-                </ul>
-            </div>
-            <div class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </nav>
+        <div class="navbar-container">
+            <nav class="container navbar text-center">
+                <h1>Cabinet dentaire du docteur Dupont</h1>
+                <div class="menu text-center mt-25">
+                    <ul>
+                        <li><a href="index.php">Accueil</a></li>
+                        <li><a href="#contact">Soins</a></li>
+                        <li><a href="#contact">A propos</a></li>
+                        <li><a href="#contact">Actualités</a></li>
+                    </ul>
+                </div>
+                <div class="menu-toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
     </header>

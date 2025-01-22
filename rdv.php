@@ -11,21 +11,23 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <footer class="row footer">
-        <div class="mentions">
-            <p>Conditions générales d'utilisation</p>
-            <p>Mentions légales</p>
-            <p>Charte déontologique</p>
-        </div>
-        <div class="contact">
-            <div class="align-icon">
-                <img src="images/localisation.png" alt="Icône de localisation" class="icon">
-                    <p>3 rue du cabinet 33 333 LaVille</p>
+    <div class="container">
+        <!-- inclusion de l'entête du site -->
+        <?php require_once(__DIR__ . '/header.php'); ?>
+    </div>
+    <div class="container container-accueil">
+        <div class="choice">
+            <div class="mt-100">
+                <a href="new_rdv.php" class="question">C'est mon premier rendez-vous avec le docteur Dupont</a>
             </div>
-            <div class="align-icon mt-25">
-                <img src="images/telephone.png" alt="Icône de localisation" class="icon">
-                <p>02 33 44 55 66</p>
+            <div class="mt-100">
+            <a href="rdv_patient.php" class="question">Je suis un(e) patient(e) du docteur Dupont</a>
             </div>
         </div>
-    </footer>
+    </div>
+    <div class="container">
+        <!-- inclusion du pied de page du site -->
+        <?php require_once(__DIR__ . '/footer.php'); ?>
+    </div>
 </body>
+</html>

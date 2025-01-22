@@ -11,52 +11,53 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container background-container">
         <!-- inclusion de l'entête du site -->
         <?php require_once(__DIR__ . '/header.php'); ?>
-    </div>
-    <section class="container container-accueil">
-        <div class="welcome">
-            <p>Bienvenue<br>
-            Le cabinet du docteur Dupont, chirurgien-dentiste à LaVille, est heureux de vous accueillir sur son nouveau site Internet destiné à vous communiquer les meilleures informations de prévention et de santé bucco-dentaire</p>
-        </div>
-        <div class="bloc-infos row mt-75">
-            <article class="infos schedule text-center">
-                <p class="mt-25">Horaires d’ouverture du cabinet</p>
-                <ul class="list-infos mt-50">
-                    <li>Lundi : Fermé</li>
-                    <li>Mardi : 9h00-18h00</li>
-                    <li>Mercredi : 9h00-18h00</li>
-                    <li>Jeudi : 9h00-18h00</li>
-                    <li>Vendredi : 9h00-18h00</li>
-                    <li>Samedi : 9h00-18h00</li>
-                    <li>Dimanche : 9h00-18h00</li>
-                </ul>
-            </article>
-            <div class="container-appointment">
-                <div class="img-appointment">
-                    <img src="images/docteur-dupont.png" class="photo-dr" alt="Le docteur Dupont dans son cabinet">
-                </div>
-                <div class="appointment">
-                    <button class="btn-appointment">Prendre rendez-vous</button>
-                </div>
+        <section>
+            <div class="welcome text-center">
+                <h3>
+                    Le cabinet du docteur Dupont, chirurgien-dentiste à LaVille, est heureux de vous accueillir sur son nouveau site Internet destiné à vous communiquer les meilleures informations de prévention et de santé bucco-dentaire
+                </h3>
             </div>
-            <article class="infos care text-center">
-                <p class="mt-25">Expertise</p>
-                <ul class="list-infos mt-50">
-                    <li>Abcès dentaire</li>
-                    <li>Consultation de chirurgie dentaire</li>
-                    <li>Implant dentaire</li>
-                    <li>Panoramique dentaire</li>
-                    <li>Prothèse dentaire</li>
-                    <li>Extraction dentaire</li>
-                </ul>
-            </article>
+            <div class="bloc-infos row mt-75">
+                <article class="infos schedule text-center">
+                    <p class="mt-25">Horaires d’ouverture du cabinet</p>
+                    <ul class="list-infos mt-50">
+                        <li>Lundi : Fermé</li>
+                        <li>Mardi : 9h00-18h00</li>
+                        <li>Mercredi : 9h00-18h00</li>
+                        <li>Jeudi : 9h00-18h00</li>
+                        <li>Vendredi : 9h00-18h00</li>
+                        <li>Samedi : 9h00-18h00</li>
+                        <li>Dimanche : 9h00-18h00</li>
+                    </ul>
+                </article>
+                <div class="container-appointment">
+                    <div class="img-appointment">
+                        <img src="images/docteur-dupont.png" class="photo-dr" alt="Le docteur Dupont dans son cabinet">
+                    </div>
+                    <div class="appointment">
+                        <a href="rdv.php" class="cta-appointment">Prendre rendez-vous</a>
+                    </div>
+                </div>
+                <article class="infos care text-center">
+                    <p class="mt-25">Expertise</p>
+                    <ul class="list-infos mt-50">
+                        <li>Abcès dentaire</li>
+                        <li>Consultation de chirurgie dentaire</li>
+                        <li>Implant dentaire</li>
+                        <li>Panoramique dentaire</li>
+                        <li>Prothèse dentaire</li>
+                        <li>Extraction dentaire</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+        <div class="mt-50">
+            <!-- inclusion du pied de page du site -->
+            <?php require_once(__DIR__ . '/footer.php'); ?>
         </div>
-    </section>
-    <div class="container">
-        <!-- inclusion du pied de page du site -->
-        <?php require_once(__DIR__ . '/footer.php'); ?>
     </div>
 
 </body>

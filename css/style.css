@@ -70,12 +70,13 @@ h4{
 }
 
 /*La barre de navigation*/
-
+.navbar-container{
+    background-color: #B6D8F2;
+}
 .navbar{
-    background-color: white;
     width: 780px;
     padding: 20px 0;
-    height: 200px;
+    height: 160px;
 }
 .contact{
     justify-content: space-between;
@@ -99,13 +100,14 @@ h4{
 
 /*Page d'accueil*/
 
-.container-accueil{
-    height: 600px;
-    background-color: #BFFFBF;
+.background-container{
+    height: 900px;
+    background-color: #F7F6CF;
 }
 .welcome{
     margin-left: 20px;
     margin-right: 20px;
+    margin-top: 20px;
 }
 /* Styles des articles*/
 .bloc-infos{
@@ -120,7 +122,7 @@ h4{
 .infos{
     width: 334px;
     height: 352px;
-    background: #BFFFBF;
+    background: #B6D8F2;
     border: 2px solid #000000;
     border-radius: 25px;
     justify-content: center;
@@ -151,22 +153,101 @@ h4{
 .appointment{
     margin-top: 10px;
 }
-.btn-appointment{
-    width: 220px;
-    height: 50px;
-    background-color: #40bfff;
-    border: none;
-    border-radius: 5px;
+.cta-appointment{
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #B6D8F2;
+    border: 2px solid #000000;
+    border-radius: 15px;
     font-size: 20px;
     font-weight: 600;
-    color: white;
+    color: black;
     cursor: pointer;
 }
 
 /*footer*/
 .footer{
-    background-color: white;
+    background-color: #B6D8F2;
     height: 150px;
     justify-content: space-between;
     align-items: center;
 }
+.mentions{
+    margin-left: 20px;
+}
+.contact{
+    margin-right: 20px;
+}
+.align-icon{
+    display: flex;
+    align-items: center;
+}
+.icon{
+    float: left;
+    margin-right: 15px;
+}
+
+/*page rdv.php*/
+.choice{
+    display: flex;
+    justify-content: space-evenly; /* Centre horizontalement */
+    align-items: center;     /* Centre verticalement */
+    height: 70%;           /* Hauteur de la page */
+}
+.question{
+    display: inline-block;
+    width: 250px; /* Vous pouvez ajuster la largeur selon vos besoins */
+    word-wrap: break-word; /* Permet de couper les mots s'ils sont trop longs */
+    white-space: normal; /* Permet le retour à la ligne */
+    text-decoration: none;
+    background-color: #B6D8F2;
+    font-size: 20px;
+    padding: 20px;
+    font-weight: 600;
+    color: black;
+    cursor: pointer;
+}
+
+/*Page new_rdv.php*/
+/*on définit la place du label par rapport au champs*/
+.form-container{
+    border: 1px solid;
+    margin-left: auto;
+    margin-right: auto;
+    height: 465px;
+    width: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    border-radius: 8px;
+}
+.form-grid{
+    display: grid;
+    grid-template-columns: 320px 320px;
+    grid-template-rows:40px 40px 40px;
+    gap:100px;
+}
+/*on définit la place du label par rapport au champs*/
+.mp-label{
+    display: flex;
+    flex-direction: column;/*on place la label au dessus du champs*/
+    align-items: flex-start;/*on aligne le label et le champs sur la gauche du conteneur*/
+}
+  .mp-label label {
+    margin-bottom: 5px; /* Espacement entre le label et le champ */
+  }
+  .mp-label input {
+    font-size: 20px;
+    width: 100%;
+  }
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
