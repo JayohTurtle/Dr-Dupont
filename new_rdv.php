@@ -11,39 +11,59 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container background-container">
         <!-- inclusion de l'entête du site -->
         <?php require_once(__DIR__ . '/header.php'); ?>
-        <div class="container-accueil">
-            <div class="text-center">
-                <h4>Merci de remplir le formulaire ci-dessous afin de prendre rendez-vous</h4>
-            </div>
-            <div class="form-container mt-50">
-                <form id = form>
-                    <div class="form-grid mt-50 ">
-                        <div class="box-nom mp-label form-control">
-                            <label for="nom">Nom</label>
-                            <input type="text" name="nom" id="nom" required>
-                            <small>Message d'erreur</small>
-                        </div>
-                        <div class="box-prenom mp-label form-control">
-                            <label for="prenom">Prénom</label>
-                            <input type="text" name="prenom" id="prenom" required>
-                            <small>Message d'erreur</small>
-                        </div>
-                        <div class="box-tel mp-label form-control">
-                            <label for="tel">Téléphone</label>
-                            <input type="tel" name="telephone" id="telephone" required>
-                            <small>Message d'erreur</small>
-                        </div>
-                        <div class="box-mail mp-label form-control">
-                            <label for="email">Email</label>
-                            <input type="email"  id="email" required>
-                            <small>Message d'erreur</small>
-                        </div>
+        <div class="text-center mt-50">
+            <h4>Merci de remplir le formulaire ci-dessous afin de prendre rendez-vous</h4>
+        </div>
+        <div class="form-container mt-25">
+            <form id = form method="post" action="create_new_patients.php">
+                <div class="form-grid mt-25">
+                    <div class="box-nom mp-label form-control">
+                        <label for="nom">Nom</label>
+                        <input type="text" name="nom" id="nom">
+                        <small>Message d'erreur</small>
                     </div>
-                </form>
-            </div>
+                    <div class="box-prenom mp-label form-control">
+                        <label for="prenom">Prénom</label>
+                        <input type="text" name="prenom" id="prenom">
+                        <small>Message d'erreur</small>
+                    </div>
+                    <div class="box-tel mp-label form-control">
+                        <label for="tel">Téléphone</label>
+                        <input type="text" name="telephone" id="telephone">
+                        <small>Message d'erreur</small>
+                    </div>
+                    <div class="box-mail mp-label form-control">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email">
+                        <small>Message d'erreur</small>
+                    </div>
+                    <div class="box-adress mp-label form-control">
+                        <label for="adress">Adresse</label>
+                        <input type="text" name="adress" id="adress">
+                        <small>Message d'erreur</small>
+                    </div>
+                    <div class="box-code mp-label form-control">
+                        <label for="code">Code postal</label>
+                        <input type="text" name="code" id="code">
+                        <small>Message d'erreur</small>
+                    </div>
+                    <div class="box-ville mp-label form-control">
+                        <label for="ville">Ville</label>
+                        <input type="text" name="ville" id="ville">
+                        <small>Message d'erreur</small>
+                    </div>
+                </div>
+                <div class="mp-btn-rdv">
+                    <button type="submit" class="btn-rdv">Envoyer</button>
+                </div>
+            </form>
+        </div>
+        <div class="mt-50">
+            <!-- inclusion du pied de page du site -->
+            <?php require_once(__DIR__ . '/footer.php'); ?>
         </div>
     </div>
 </body>

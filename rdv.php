@@ -11,12 +11,10 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container background-container">
         <!-- inclusion de l'entête du site -->
         <?php require_once(__DIR__ . '/header.php'); ?>
-    </div>
-    <div class="container container-accueil">
-        <div class="choice">
+        <div class="row choice">
             <div class="mt-100">
                 <a href="new_rdv.php" class="question">C'est mon premier rendez-vous avec le docteur Dupont</a>
             </div>
@@ -24,10 +22,10 @@
             <a href="rdv_patient.php" class="question">Je suis un(e) patient(e) du docteur Dupont</a>
             </div>
         </div>
-    </div>
-    <div class="container">
-        <!-- inclusion du pied de page du site -->
-        <?php require_once(__DIR__ . '/footer.php'); ?>
+        <div class="mt-150" >
+            <!-- inclusion du pied de page du site -->
+            <?php require_once(__DIR__ . '/footer.php'); ?>
+        </div>
     </div>
 </body>
 </html>
