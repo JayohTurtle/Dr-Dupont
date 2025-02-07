@@ -9,7 +9,6 @@ class Controller{
         $view = new View();
         $view -> render("accueil",[
             'daysList' => $daysList
-        
         ]);
     }
 
