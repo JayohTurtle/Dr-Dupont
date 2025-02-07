@@ -93,17 +93,7 @@ ul li::marker {
     font-size: 24px;
 }
 
-/*Page A propos*/
-.team {
-    width: 280px;
-    height: 350px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-.text-apropos{
-    width:300px;
-}
-
+/*Page new-rdv*/
 
 /*footer*/
 .text-footer {
@@ -131,36 +121,14 @@ ul li::marker {
 .date-group{
     display: block;
 }
-.flatpickr-input {
-    background-color: white !important;
-    color: black;
-}
-.form-text{
-    color : red
-}
-.form-group small{
-    visibility: hidden;
+.input-group .form-text {
+    display: block;
     margin-top: 5px;
-}
-.form-group.error input{
-    border-color: #e73c3c;
-}
-.form-group.error small{
-    border-color: #e73c3c;
-    visibility: visible;
-}
-#mapid { 
+    color: #dc3545; /* Rouge Bootstrap pour les erreurs */
+  }
+  #mapid {
+    width: 400px; 
     height: 250px;
-    width: 400px;
-}
-
-.custom-div-icon {
-    background: transparent;
-    border: none;
-}
-.custom-div-icon .fa {
-    font-size: 24px;
-    color: red;
 }
 
 .map-container{
