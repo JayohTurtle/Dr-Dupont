@@ -4,10 +4,10 @@ class Horaires{
 
     private int $id = 0;
     private string $jour = '';
-    private string $amOpen = '00:00:00';
-    private string $amClose = '00:00:00';
-    private string $pmOpen = '00:00:00';
-    private string $pmClose = '00:00:00';
+    private string $ouvertureAm = '00:00:00';
+    private string $fermetureAm = '00:00:00';
+    private string $ouverturePm = '00:00:00';
+    private string $fermeturePm = '00:00:00';
 
     public function __construct(array $data = [])
     {
@@ -18,14 +18,14 @@ class Horaires{
     }
 
     public function hydrate(array $data = []) {
-        $this->id = $data['id'] ?? 0;
-        $this->jour = $data['jour'] ?? '';
-        $this->amOpen = $data['ouverture_am'] ?? '00:00:00';
-        $this->amClose = $data['fermeture_am'] ?? '00:00:00';
-        $this->pmOpen = $data['ouverture_pm'] ?? '00:00:00';
-        $this->pmClose = $data['fermeture_pm'] ?? '00:00:00';
+        foreach ($data as $key => $value){
+            $method = 'set' . str_replace('_', '', ucwords($key, '_'));
+        
+            if (method_exists($this, $method)) {
+                $this->$method($value);
+            }
+        }
     }
-
 
     public function setId (int $id) : void{
         $this -> id = $id;
@@ -43,35 +43,35 @@ class Horaires{
         return $this -> jour;
     }
 
-    public function setamOpen (string $amOpen) {
-        $this -> amOpen = $amOpen;
+    public function setOuvertureAm (string $ouvertureAm) {
+        $this -> ouvertureAm = $ouvertureAm;
     }
 
-    public function getAmOpenFormatted(): string {
-        return substr($this->amOpen, 0, 5); // Enlève les secondes (HH:MM)
+    public function getOuvertureAmFormatted(): string {
+        return substr($this->ouvertureAm, 0, 5); // Enlève les secondes (HH:MM)
     }
 
-    public function setamClose (string $amClose) {
-        $this -> amClose = $amClose;
+    public function setFermetureAm (string $fermetureAm) {
+        $this -> fermetureAm = $fermetureAm;
     }
 
-    public function getAmCloseFormatted(): string {
-        return substr($this->amClose, 0, 5);
+    public function getFermetureAmFormatted(): string {
+        return substr($this->fermetureAm, 0, 5);
     }
 
-    public function setpmOpen (string $pmOpen) {
-        $this -> pmOpen = $pmOpen;
+    public function setOuverturePm (string $ouverturePm) {
+        $this -> ouverturePm = $ouverturePm;
     }
-    public function getPmOpenFormatted(): string {
-        return substr($this->pmOpen, 0, 5);
-    }
-
-    public function setpmClose (string $pmClose) {
-        $this -> pmClose = $pmClose;
+    public function getOuverturePmFormatted(): string {
+        return substr($this->ouverturePm, 0, 5);
     }
 
-    public function getPmCloseFormatted(): string {
-        return substr($this->pmClose, 0, 5);
+    public function setFermeturePm (string $fermeturePm) {
+        $this -> fermeturePm = $fermeturePm;
+    }
+
+    public function getFermeturePmFormatted(): string {
+        return substr($this->fermeturePm, 0, 5);
     }
 
 }

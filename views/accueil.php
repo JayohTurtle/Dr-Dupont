@@ -13,14 +13,14 @@ $horaires = $horairesManager->getHoraires();
             foreach ($horaires as $horaire) {
                 echo "<p><strong>{$horaire->getJour()} :</strong> ";
                 
-                if ($horaire->getAmOpenFormatted() === '00:00' && $horaire->getPmOpenFormatted() === '00:00') {
+                if ($horaire->getOuvertureAmFormatted() === '00:00' && $horaire->getFermeturePmFormatted() === '00:00') {
                     echo "Fermé</p>";
-                } elseif ($horaire->getAmOpenFormatted() === '00:00') {
-                    echo "{$horaire->getPmOpenFormatted()} - {$horaire->getPmCloseFormatted()}</p>";
-                } elseif ($horaire->getPmOpenFormatted() === '00:00') {
-                    echo "{$horaire->getAmOpenFormatted()} - {$horaire->getAmCloseFormatted()}</p>";
+                } elseif ($horaire->getOuvertureAmFormatted() === '00:00') {
+                    echo "{$horaire->getOuverturePmFormatted()} - {$horaire->getFermeturePmFormatted()}</p>";
+                } elseif ($horaire->getOuverturePmFormatted() === '00:00') {
+                    echo "{$horaire->getOuvertureAmFormatted()} - {$horaire->getFermetureAmFormatted()}</p>";
                 } else {
-                    echo "{$horaire->getAmOpenFormatted()} - {$horaire->getAmCloseFormatted()} / {$horaire->getPmOpenFormatted()} - {$horaire->getPmCloseFormatted()}</p>";
+                    echo "{$horaire->getOuvertureAmFormatted()} - {$horaire->getFermetureAmFormatted()} / {$horaire->getOuverturePmFormatted()} - {$horaire->getFermeturePmFormatted()}</p>";
                 }
             }
             ?>
