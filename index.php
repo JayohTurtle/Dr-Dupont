@@ -2,7 +2,9 @@
 session_start();
 
 include_once('config.php');
-include_once('model.php');
+include_once('Model/Horaires.php');
+include_once('Model/AbstractManager.php');
+include_once('Model/HorairesManager.php');
 include_once('view.php');
 include_once('controller.php');
 

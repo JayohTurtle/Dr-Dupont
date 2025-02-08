@@ -4,11 +4,11 @@
 class Controller{
 
     function showDaysList(){
-        $model = new Model();
-        $daysList = $model -> getDaysList();
+        $HorairesManager = new HorairesManager();
+        $horaires = $HorairesManager -> getHoraires();
         $view = new View();
         $view -> render("accueil",[
-            'daysList' => $daysList
+            'horaires' => $horaires
         ]);
     }
 

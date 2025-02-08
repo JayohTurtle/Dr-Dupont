@@ -1,38 +1,31 @@
+<?php
+
+$horairesManager = new HorairesManager();
+$horaires = $horairesManager->getHoraires();
+?>
 
 <h4 class="text-center mt-25 p-3">Le cabinet du Dr Dupont, chirurgien-dentiste à Rouen, est heureux de vous accueillir sur son nouveau site Internet destiné à vous communiquer les meilleures informations de prévention et de santé bucco-dentaire.</h4>
 <div class="row justify-content-between mt-75">
     <article class="text-center col-md-4">
-    <p class="mt-25">Horaires d'ouverture du cabinet</p>
-    <?php
-        date_default_timezone_set('Europe/Paris'); // On définit le fuseau horaire
-        setlocale(LC_TIME, 'fr_FR.UTF-8'); // On définit la locale en français
-        $current_time = new DateTime;//on définit l'haure actuelle
-
-        for ($i=0; $i < count($daysList) ; $i++) { 
-            $day = $daysList[$i]['jour'];
-            $amOpen = $daysList[$i]['ouverture_am'];
-            $amClose = $daysList[$i]['fermeture_am'];
-            $pmOpen = $daysList[$i]['ouverture_pm'];
-            $pmClose = $daysList[$i]['fermeture_pm'];
-            // On convertit les heures au format souhaité (HH:MM)
-            $amOpenFormatted = date('H:i', strtotime($amOpen));
-            $amCloseFormatted = date('H:i', strtotime($amClose));
-            $pmOpenFormatted = date('H:i', strtotime($pmOpen));
-            $pmCloseFormatted = date('H:i', strtotime($pmClose));
-            //Si les horaires d'ouverture sont 00:00:00 on affiche "fermé"
-            if ($amOpen === '00:00:00' && $pmOpen === '00:00:00') {
-                echo ("$day : fermé <br/>");
+        <p class="mt-25">Horaires d'ouverture du cabinet</p>
+        <div>
+            <?php
+            foreach ($horaires as $horaire) {
+                echo "<p><strong>{$horaire->getJour()} :</strong> ";
+                
+                if ($horaire->getAmOpenFormatted() === '00:00' && $horaire->getPmOpenFormatted() === '00:00') {
+                    echo "Fermé</p>";
+                } elseif ($horaire->getAmOpenFormatted() === '00:00') {
+                    echo "{$horaire->getPmOpenFormatted()} - {$horaire->getPmCloseFormatted()}</p>";
+                } elseif ($horaire->getPmOpenFormatted() === '00:00') {
+                    echo "{$horaire->getAmOpenFormatted()} - {$horaire->getAmCloseFormatted()}</p>";
+                } else {
+                    echo "{$horaire->getAmOpenFormatted()} - {$horaire->getAmCloseFormatted()} / {$horaire->getPmOpenFormatted()} - {$horaire->getPmCloseFormatted()}</p>";
+                }
             }
-            elseif ($amOpen === '00:00:00') {
-                echo ("$day : $pmOpenFormatted - $pmCloseFormatted <br/>");
-            }
-            elseif ($pmOpen === '00:00:00'){
-                echo ("$day : $amOpenFormatted - $amCloseFormatted <br/>");
-            }else{
-                echo ("$day : $amOpenFormatted - $amCloseFormatted / $pmOpenFormatted - $pmCloseFormatted <br/>");
-            }
-        }
-        ?>
+            ?>
+        </div>
+    </article>
     </article>
     <div class="col-md-4 text-center">
         <div class="mb-3">
