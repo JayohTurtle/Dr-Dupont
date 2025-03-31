@@ -33,7 +33,8 @@
                         ?>
                         <p><strong>Heure: </strong><?= htmlspecialchars($formattedTime) ?></p>
                         <p><strong>Soin: </strong><?= htmlspecialchars($prochainRendezVous->getSoin()) ?></p>
-                        <a href="#" onclick="ouvrirPopup('popupModifRendezVous')">Modifier le rendez-vous</a>
+                        <p><a href="#" onclick="ouvrirPopup('popupModifRendezVous')">Modifier le rendez-vous</a></p>
+                        <p><a href="#" onclick="ouvrirPopup('popupSupprimRendezVous')" class="suppression">Supprimer le rendez-vous</a></p>
                     <?php endif; ?>
                 </div>
             </div>
@@ -89,21 +90,22 @@
             <span class="close" onclick="fermerPopup('popupModifRendezVous')">&times;</span>
             <h5>Choisir une date</h5>
             <form class = "article justify-content-center" method="POST" id="modifRdvForm">
-                <div class="row mt-2 justify-content-center">
-                <div class="mb-3 mx-3">
-                    <label>Date</label>
-                    <?php if ($prochainRendezVous): ?>
-                        <input type="date" class="form-control" id="datepicker" name="dateRdv" 
-                            value="<?= htmlspecialchars((new DateTime($prochainRendezVous->getDateRdv()))->format('Y-m-d')); ?>">
-                    <?php else: ?>
-                        <input type="date" class="form-control" id="datepicker" name="dateRdv" value="">
-                    <?php endif; ?>
-                </div>
-                <div>
-                    <label for="infoSoin">Soin</label>
-                    <select class="form-control" name="soin" id="infoSoin">
-                    <?php $soinActuel = $prochainRendezVous ? htmlspecialchars($prochainRendezVous->getSoin()) : ''; ?>
+                <div class="d-flex mt-2 justify-content-center">
+                    <div class="mb-3 mx-3">
+                        <label>Date</label>
+                        <?php if ($prochainRendezVous): ?>
+                            <input type="date" class="form-control" id="datepicker" name="dateRdv" 
+                                value="<?= htmlspecialchars((new DateTime($prochainRendezVous->getDateRdv()))->format('Y-m-d')); ?>">
+                        <?php else: ?>
+                            <input type="date" class="form-control" id="datepicker" name="dateRdv" value="">
+                        <?php endif; ?>
+                    </div>
+                    <div>
+                        <label for="infoSoin">Soin</label>
                         <select class="form-control" name="soin" id="infoSoin">
+                            <?php 
+                            $soinActuel = $prochainRendezVous ? htmlspecialchars($prochainRendezVous->getSoin()) : ''; 
+                            ?>
                             <?php foreach ($soins as $soin) : ?>
                                 <option value="<?= htmlspecialchars($soin->getSoin()); ?>" 
                                     <?= ($soin->getSoin() === $soinActuel) ? 'selected' : ''; ?>>
@@ -111,7 +113,7 @@
                                 </option>
                             <?php endforeach; ?>
                         </select>
-
+                    </div>
                 </div>
                 <input type="hidden" id="hiddenTime" name="heureRdv" value="<?= htmlspecialchars($hiddenTime ?? '') ?>">
                 <input type="hidden" name="dateRdvActuelle" value="<?= htmlspecialchars($prochainRendezVous ? $prochainRendezVous->getDateRdv() : ''); ?>">
@@ -137,6 +139,26 @@
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+    <!-- Boîte modale pour supprimer le rendez-vous -->
+    <div id="popupSupprimRendezVous" class="modal">
+        <div class="modal-content form-group d-flex flex-column align-items-center">
+            <span class="close" onclick="fermerPopup('popupSupprimRendezVous')">&times;</span>
+            <h5>Confirmez la suppression de ce rendez-vous</h5>
+            <form class = "article justify-content-center" method="POST" id="supprimRdvForm">
+                <div class="d-flex mt-2 justify-content-center">
+                    <div class="mb-3 mx-3">
+                        <h6><?= htmlspecialchars($patient->getPrenom()) ?> <?= htmlspecialchars($patient->getNom()) ?></h6>
+                        <p>Le <?= htmlspecialchars($prochainRendezVous ? $prochainRendezVous->getDateRdvFormatFr() : ''); ?> à <?= htmlspecialchars($formattedTime) ?></p>
+                        <input type="hidden" name="dateRdvActuelle" value="<?= htmlspecialchars($prochainRendezVous ? $prochainRendezVous->getDateRdv() : ''); ?>">
+                        <input type="hidden" name="idPatient" value="<?= (int) $patient->getIdPatient() ?>">
+                        <div class="form-group col-md-12 d-flex justify-content-center mt-3">
+                            <button type="submit" class="btn btn-danger small-button">Confirmer</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

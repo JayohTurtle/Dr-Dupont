@@ -207,9 +207,60 @@
     </div>
     <div class = "row mt-3">
         <div class="articles col-md-6">
+            <form class = "article" id="formModifSoins" method="POST" action="index.php?action=modifSoins">
+                <h5 class="text-center">Soins</h5>
+                <div class="radio-group col-md-12">
+                    <div class="d-flex justify-content-start">
+                        <div class="radio-item me-3">
+                            <input type="radio" id="ajouterSoin" name="soinResearch" value="ajouterSoin" checked>
+                            <label for="ajouterSoin">Ajouter</label>
+                        </div>
+                        <div class="radio-item me-3">
+                            <input type="radio" id="modifierSoin" name="soinResearch" value="modifierSoin">
+                            <label for="modifierSoin">Modifier</label>
+                        </div>
+                        <div class="radio-item me-3">
+                            <input type="radio" id="supprimerSoin" name="soinResearch" value="supprimerSoin">
+                            <label for="supprimerSoin">Supprimer</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-2 col-md-8" id="inputAjouterSoin">
+                    <label for="soinAjout">Soin</label>
+                    <input type="text" class="form-control" id="soinAjout" name="soinAjout">
+                </div>
+                <div class="form-group d-none mt-2 col-md-8" id="inputModifierSoin">
+                    <label for="soinModif">Soin</label>
+                    <input type="text" class="form-control" id="soinModif" name="soinModif" list="getSoinsModif" autocomplete="off">
+                    <datalist id="getSoinsModif">
+                        <?php foreach ($soins as $soin) : ?>
+                            <option value="<?= htmlspecialchars($soin->getSoin()); ?>"
+                                data-id="<?= htmlspecialchars($soin->getIdSoin()); ?>">
+                            </option>
+                        <?php endforeach; ?>
+                    </datalist>
+                    <input type="hidden" name="idSoinModif" id="idSoinModif">
+                </div>
+                <div class="form-group d-none mt-2 col-md-8" id="inputSupprimerSoin">
+                    <label for="soinSupprim">Soin</label>
+                    <input type="text" class="form-control" id="soinSupprim" name="soinSupprim" list="getSoinsSupprim" autocomplete="off">
+                    <datalist id="getSoinsSupprim">
+                        <?php foreach ($soins as $soin) : ?>
+                            <option value="<?= htmlspecialchars($soin->getSoin()); ?>"
+                                data-id="<?= htmlspecialchars($soin->getIdSoin()); ?>">
+                            </option>
+                        <?php endforeach; ?>
+                    </datalist>
+                    <input type="hidden" name="idSoinSupprim" id="idSoinSupprim">
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary mt-3">Envoyer</button>
+                </div>
+            </form>
+        </div>
+        <div class="articles col-md-6">
             <form class = "article" id="getionPatients" method="POST" action="index.php?action=gestionPatients">
                 <h5 class="text-center">Patients</h5>
-                <h6>Recherche</h6>
                 <div class="radio-group col-md-12">
                     <div class="d-flex justify-content-start">
                         <div class="radio-item me-3">
@@ -262,91 +313,18 @@
                 </div>
             </form>
         </div>
-        <div class="articles col-md-6">
-            <form class = "article" id="formGestionRdv" method="POST" action="index.php?action=gestionRdv">
-                <h5 class="text-center">Rendez-vous</h5>
-                <h6>Recherche</h6>
-                <div class="radio-group col-md-12">
-                    <div class="d-flex justify-content-start">
-                        <div class="radio-item me-3">
-                            <input type="radio" id="dateRdv" name="rdvResearch" value="dateRdv" checked>
-                            <label for="dateRdv">Date</label>
-                        </div>
-                        <div class="radio-item me-3">
-                            <input type="radio" id="soinRdv" name="rdvResearch" value="soinRdv">
-                            <label for="soinRdv">Soin</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-2 align-items-end">
-                    <div class="col-md-8">
-                        <div class="form-group" id="inputDateRdv">
-                            <label for="dateRdv">Date</label>
-                            <input type="date" class="form-control rdv-input" id="dateRdv" name="dateRdv">
-                        </div>
-                        <div class="form-group d-none" id="inputSoinRdv">
-                            <label for="soinRdv">Soin</label>
-                            <input type="text" class="form-control rdv-input" name="soinRdv" id="soinRdv" list="getSoins" autocomplete="off">
-                            <datalist id="getSoins">
-                            <?php foreach ($soins as $soin) : ?>
-                                <option value="<?= htmlspecialchars($soin->getSoin()); ?>"></option>
-                            <?php endforeach; ?>
-                            </datalist>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <button type="submit" class="btn btn-primary mt-3">Envoyer</button>
-                </div>
-            </form>
-        </div>
     </div>
     <div class="articles col-md-6 mt-3">
-        <form class = "article" id="formModifSoins" method="POST" action="index.php?action=modifSoins">
-            <h5 class="text-center">Soins</h5>
-            <div class="radio-group col-md-12">
-                <div class="d-flex justify-content-start">
-                    <div class="radio-item me-3">
-                        <input type="radio" id="ajouterSoin" name="soinResearch" value="ajouterSoin" checked>
-                        <label for="ajouterSoin">Ajouter</label>
-                    </div>
-                    <div class="radio-item me-3">
-                        <input type="radio" id="modifierSoin" name="soinResearch" value="modifierSoin">
-                        <label for="modifierSoin">Modifier</label>
-                    </div>
-                    <div class="radio-item me-3">
-                        <input type="radio" id="supprimerSoin" name="soinResearch" value="supprimerSoin">
-                        <label for="supprimerSoin">Supprimer</label>
+        <form class = "article" id="formGestionRdv" method="POST" action="index.php?action=gestionRdv">
+            <h5 class="text-center">Rendez-vous</h5>
+            <h6>Recherche</h6>
+            <div class="row mt-2 align-items-end">
+                <div class="col-md-8">
+                    <div class="form-group" id="inputDateRdv">
+                        <label for="dateRdv">Date</label>
+                        <input type="date" class="form-control rdv-input" id="dateRdv" name="dateRdv">
                     </div>
                 </div>
-            </div>
-            <div class="form-group mt-2" id="inputAjouterSoin">
-                <label for="soinAjout">Soin</label>
-                <input type="text" class="form-control" id="soinAjout" name="soinAjout">
-            </div>
-            <div class="form-group d-none mt-2" id="inputModifierSoin">
-                <label for="soinModif">Soin</label>
-                <input type="text" class="form-control" id="soinModif" name="soinModif" list="getSoinsModif" autocomplete="off">
-                <datalist id="getSoinsModif">
-                    <?php foreach ($soins as $soin) : ?>
-                        <option value="<?= htmlspecialchars($soin->getSoin()); ?>"
-                            data-id="<?= htmlspecialchars($soin->getIdSoin()); ?>">
-                        </option>
-                    <?php endforeach; ?>
-                </datalist>
-                <input type="hidden" name="idSoinModif" id="idSoinModif">
-            </div>
-            <div class="form-group d-none mt-2" id="inputSupprimerSoin">
-                <label for="soinSupprim">Soin</label>
-                <input type="text" class="form-control" id="soinSupprim" name="soinSupprim" list="getSoinsSupprim" autocomplete="off">
-                <datalist id="getSoinsSupprim">
-                    <?php foreach ($soins as $soin) : ?>
-                        <option value="<?= htmlspecialchars($soin->getSoin()); ?>"
-                            data-id="<?= htmlspecialchars($soin->getIdSoin()); ?>">
-                        </option>
-                    <?php endforeach; ?>
-                </datalist>
-                <input type="hidden" name="idSoinSupprim" id="idSoinSupprim">
             </div>
             <div>
                 <button type="submit" class="btn btn-primary mt-3">Envoyer</button>
@@ -354,4 +332,5 @@
         </form>
     </div>
 </div>
+    
 <script src="js/admin.js" defer></script>

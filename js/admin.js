@@ -19,10 +19,6 @@ function updateVisibleInput(category) {
             telephone: "inputTelephone",
             email: "inputEmail",
         },
-        rdv: {
-            dateRdv: "inputDateRdv",
-            soinRdv: "inputSoinRdv",
-        },
         actualite: {
             ajouterActualite: "inputAjouterActualite",
             modifierActualite: "inputModifierActualite",

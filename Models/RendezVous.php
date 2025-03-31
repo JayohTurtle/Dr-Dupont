@@ -8,6 +8,8 @@ class RendezVous extends AbstractEntity{
     private string $heureRdv;
     private string $soin;
     private int $idPatient;
+    private $nom;
+    private $prenom;
 
     public function setIdRdv(int $idRdv): void {
         $this->idRdv = $idRdv;
@@ -57,4 +59,19 @@ class RendezVous extends AbstractEntity{
         return $this->soin;
     }
 
+    public function setNom($nom) {
+        $this->nom = $nom;
+    }
+
+    public function getNom() {
+        return $this->nom;
+    }
+
+    public function setPrenom($prenom) {
+        $this->prenom = $prenom;
+    }
+
+    public function getPrenom() {
+        return $this->prenom;
+    }
 }

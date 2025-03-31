@@ -106,6 +106,11 @@ spl_autoload_register(function ($class) {
             $controller->handleConfirmationModificationPatient();
             break;
 
+        case 'gestionRdv':
+            $controller = new RendezVousController();
+            $controller -> showRendezVous();
+        break;
+
         
 
         default:

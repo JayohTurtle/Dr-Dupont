@@ -179,5 +179,19 @@ class RendezVousController{
             exit;
         }
     }
+
+    public function showRendezVous(){
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $dateRdv = $_POST['dateRdv'];
+
+            $rendezVousList = $this->rendezVousManager->getRendezVousByDate($dateRdv);
+
+            $view = new View();
+            $view->render("rendezVous", [
+                'rendezVousList' => $rendezVousList,
+            ]);
+
+            }
+    }
 }
 

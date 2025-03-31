@@ -176,12 +176,11 @@ class RendezVousManager extends AbstractEntityManager {
     }
 
     public function mettreAJourRendezVous($idPatient, $dateRdvActuelle, $soin, $dateRdv, $heureRdv) {
-        // Requête SQL pour mettre à jour le rendez-vous
+
         $sql = "UPDATE rendezvous
                 SET soin = :soin, dateRdv = :dateRdv, heureRdv = :heureRdv
                 WHERE idPatient = :idPatient AND dateRdv = :dateRdvActuelle";
     
-        // Utilisation du gestionnaire de base de données pour exécuter la requête
         $params = [
             ':soin' => $soin,
             ':dateRdv' => $dateRdv,
@@ -190,11 +189,31 @@ class RendezVousManager extends AbstractEntityManager {
             ':dateRdvActuelle' => $dateRdvActuelle
         ];
     
-        // Appel à la méthode de votre dbManager pour exécuter la requête
-        $result =  $this->db->query($sql, $params);
+        $this->db->query($sql, $params);
 
         return true;
     }
+
+    public function getRendezVousByDate($dateRdv) {
+        $sql = "SELECT r.*, p.nom, p.prenom 
+                FROM rendezvous r
+                JOIN patients p ON r.idPatient = p.idPatient
+                WHERE r.dateRdv = :dateRdv";
     
+        $result = $this->db->query($sql, ['dateRdv' => $dateRdv]);
+    
+        $rendezVousList = [];
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            $rendezVous = new RendezVous($row); // Crée un objet RendezVous
+    
+            // Ajouter directement le nom et prénom du patient
+            $rendezVous->setNom($row['nom']);
+            $rendezVous->setPrenom($row['prenom']);
+    
+            $rendezVousList[] = $rendezVous;
+        }
+    
+        return $rendezVousList;
+    }    
 }
     
