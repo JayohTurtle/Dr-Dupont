@@ -42,7 +42,7 @@
         </article>
         <div class="col-md-12 text-center">
             <div class="mt-3 mb-4">
-                <a href="index.php?action=new_rdv" class="cta-appointment">Je prends rendez-vous</a>
+                <a href="index.php?action=new_rdv" class="cta-appointment mb-3">Je prends rendez-vous</a>
             </div>
         </div>
     </div>

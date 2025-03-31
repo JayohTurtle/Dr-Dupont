@@ -7,13 +7,17 @@
 /*police et couleur principale des textes*/
 body{
     font-family:"Poppins", sans-serif;
-    color:black;
+    color:#E0E0E0;
+    background-color: #121212;
 }
 /*Largeur maximale des éléments et centrage du container*/
 .container{
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
+    border-radius: 10px;
+    background: #1E1E1E;
+    box-shadow: 0px 0px 10px rgba(0, 255, 128, 0.2);
 }
 
 /*les marges*/
@@ -38,27 +42,34 @@ body{
 .mb-50{
     margin-bottom: 50px;
 }
+h1, h2, h5, h3, h6{
+    color:#A8D5BA;
+}
 
 /*Header*/
 .custom-container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
     text-align: center;
+    background-color: #1E1E1E
+}
+.navbar{
+    background-color: #121212;
 }
 .navbar-cta ul {
     list-style: none;
     padding: 0;
     display: flex;
     justify-content: center;
-    gap: 50px; /* Ajustez l'espace entre les liens */
-    flex-wrap: wrap; /* Permet aux éléments de s'enrouler sur plusieurs lignes si nécessaire */
+    gap: 50px;
+    flex-wrap: wrap;
 }
 .navbar-cta ul li {
     margin: 0;
 }
 .navbar-cta ul li a {
     text-decoration: none;
-    color: black;
+    color: #E0E0E0;
     font-size: 20px;
     font-weight: bold;
 }
@@ -66,17 +77,99 @@ body{
     text-decoration: underline;
 }
 
-/*Page index.php*/
+.navbar-toggler {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    border: none;
+    background: transparent;
+}
 
+/* Conteneur des barres */
+.navbar-toggler-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 30px;
+    height: 21px;
+}
+
+/* Les barres du menu burger */
+.navbar-toggler-icon .bar {
+    background-color: #fff;
+    width: 30px;
+    height: 3px;
+    border-radius: 3px; 
+    transition: all 0.3s ease;
+}
+
+/* Menu burger : éléments alignés verticalement sur mobile */
+@media (max-width: 992px) {
+
+    .navbar-toggler {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .navbar-collapse {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .navbar-nav {
+        width: 100%;
+    }
+
+    .nav-item {
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    .nav-link {
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .navbar-nav .nav-item:last-child {
+        margin-bottom: 0;
+    }
+}
+
+/*Page index.php*/
+.article-accueil{
+    height: 350px;
+    border-radius: 10px;
+    background: #1E1E1E;
+    box-shadow: 0px 0px 10px rgba(0, 255, 128, 0.2);
+}
 .photo-dr{
     width: 280px;
     height: 350px;
     object-fit: cover;
     border-radius: 8px;
 }
-.cta-appointment{
-    font-size: 24px;
+.cta-appointment {
+    display: inline-block;
+    background-color: #00C896;
+    color: #121212;
+    text-decoration: none;
+    padding: 12px 20px;
+    font-size: 18px;
     font-weight: bold;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.cta-appointment:hover {
+    background-color: #00A57E;
+    color: #ffffff;
 }
 
 /*Page soins*/
@@ -98,36 +191,41 @@ ul li::marker {
     width: 280px;
     height: 350px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 25px;
 }
 .text-apropos{
     width:300px;
 }
 
-
 /*footer*/
+.footer{
+    background-color: #121212;
+}
 .text-footer {
     font-size: 16px;
-    color: black;
+    color: #E0E0E0;
 }
 
 /*Page new_rdv.php*/
 /*on définit la place du label par rapport au champs*/
 .form-container{
-    border: 1px solid;
+    border: none;
     margin-left: auto;
     margin-right: auto;
     height: 500px;
     width: 800px;
     justify-content: center;
     align-items: flex-start;
-    border-radius: 25px;
+    border-radius: 10px;
+    background-color: #1E1E1E;
+    box-shadow: 0px 0px 10px rgba(0, 255, 128, 0.2);
     padding: 20px;
 }
 .form-row {
     display: flex;
     justify-content: center;
 }
+
 .date-group{
     display: block;
 }
@@ -135,19 +233,9 @@ ul li::marker {
     background-color: white !important;
     color: black;
 }
-.form-text{
-    color : red
-}
-.form-group small{
-    visibility: hidden;
-    margin-top: 5px;
-}
-.form-group.error input{
-    border-color: #e73c3c;
-}
-.form-group.error small{
-    border-color: #e73c3c;
-    visibility: visible;
+.error{
+    box-shadow: 0 0 5px red; /* Lueur rouge autour */
+    color: red;
 }
 #mapid { 
     height: 250px;
@@ -171,6 +259,25 @@ ul li::marker {
     align-items: flex-start;
 }
 
+/*Page actualités*/
+p, li {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+.articles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+.article {
+    background: #252525;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 8px rgba(0, 255, 128, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
 /*page confirmation_rdv.php*/
 .cta-modif{
     background-color: #80FF80;
@@ -183,3 +290,70 @@ ul li::marker {
 .footer-exit{
     margin-top: 460px;
 }
+
+/*Pop up ajout d'informations dans researchResultContact*/ 
+
+.modal {
+    display: none; /* Caché par défaut */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Contenu du popup */
+.modal-content {
+    background-color: #252525;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 40%;
+    text-align: center;
+}
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centre horizontalement */
+}
+
+/* Bouton pour fermer */
+.close {
+    color: #E0E0E0;
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: white;
+}
+
+/*Page Admin*/
+
+.radio-group {
+    display: flex;
+    flex-direction: row;
+}
+
+.radio-item {
+    display: flex;
+    align-items: center;
+    margin-left: 10px; 
+}
+
+.radio-item label {
+    margin-left: 10px;
+    margin-bottom: 0;
+}
+
+a{
+    color: #90CAF9;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+
+

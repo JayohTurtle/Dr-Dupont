@@ -8,24 +8,30 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
-    <link rel="stylesheet" href="assets/leaflet.awesome-markers/css/style.css" /> 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="mainNavbar">
+    <nav class="navbar navbar-expand-lg" id="mainNavbar">
         <div class="container">
             <div class="custom-container">
                 <h1>Cabinet dentaire du docteur Dupont</h1>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <div class="navbar-toggler-icon">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <div class="navbar-cta mx-auto">
                         <ul>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?action=admin">🔐 Administrateur</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="index.php?action=accueil">Accueil</a>
                             </li>
@@ -43,14 +49,14 @@
                 </div>
             </div>
         </div>
-        </nav>
-        <main class="container">
-            <?= $content ?>
-        </main>
-        <footer class="footer bg-light text-footer py-4">
+    </nav>
+    <main class="container">
+        <?= $content ?>
+    </main>
+    <footer class="footer text-footer py-4">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6 d-flex flex-column justify-content-between align-items-center">
+            <div class="row d-flex align-items-center justify-content-center">
+                <div class="col-md-6 d-flex flex-column align-items-center">
                     <div class="mentions">
                         <p>Conditions générales d'utilisation</p>
                         <p>Mentions légales</p>
@@ -72,9 +78,10 @@
             </div>
         </div>
     </footer>
-    <script type="module" src="js/script.js"></script>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="assets/leaflet.awesome-markers/leaflet.awesome-markers.min.js"></script>
+    <script src="js/script.js" defer></script>
+    <script src="js/mainTemplate.js" defer> </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 </body>

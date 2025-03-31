@@ -1,6 +1,7 @@
 <?php
 
-class Horaires{
+include_once('AbstractEntity.php');
+class Horaires extends AbstractEntity{
 
     private int $id = 0;
     private string $jour = '';
@@ -8,24 +9,6 @@ class Horaires{
     private string $fermetureAm = '00:00:00';
     private string $ouverturePm = '00:00:00';
     private string $fermeturePm = '00:00:00';
-
-    public function __construct(array $data = [])
-    {
-        if (!empty ($data)){
-            $this -> hydrate($data);
-        }
-        
-    }
-
-    public function hydrate(array $data = []) {
-        foreach ($data as $key => $value){
-            $method = 'set' . str_replace('_', '', ucwords($key, '_'));
-        
-            if (method_exists($this, $method)) {
-                $this->$method($value);
-            }
-        }
-    }
 
     public function setId (int $id) : void{
         $this -> id = $id;
@@ -73,5 +56,4 @@ class Horaires{
     public function getFermeturePmFormatted(): string {
         return substr($this->fermeturePm, 0, 5);
     }
-
 }

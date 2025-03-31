@@ -1,82 +1,96 @@
-// Ajoutez un écouteur d'événement pour intercepter la soumission du formulaire
+// Ajouter un écouteur d'événement pour intercepter la soumission du formulaire
 document.getElementById("form").addEventListener("submit", function(event) {
-    // Empêcher la soumission par défaut du formulaire
-    event.preventDefault();
-  
-    // Appeler la fonction de validation
-    if (validateForm()) {
-      // Si la validation est réussie, soumettre le formulaire manuellement
-      this.submit();
-      
-    }
-  });
-  
-  /**
-  * fonction qui vérifie la validité des champs quand on clique sur le submit
-  */
-  function validateForm(){
-    //on vérifie que les input ne sont pas vides
-    //on sélectionne tous les input
-    const nom = document.getElementById('nom')
-    const prenom = document.getElementById('prenom')
-    const telephone = document.getElementById('telephone')
-    const email = document.getElementById('email')
-  
-    let nomValue = nom.value.trim()
-    let prenomtValue = prenom.value.trim()
-  
-    const input = document.querySelectorAll('input')
-      for(let i = 0; i < input.length; i++){
-          let inputId = input[i].id//on récupère les id
-          let inputElement = document.getElementById(inputId)//on se place dans le DOM
-          let inputValue = inputElement.value.trim()//on récupère la valeur du champ et on supprme les éventuels espaces au début et à la fin
-          if( inputValue === ""){
-              let message = "Ce champ ne peut être vide"//message d'erreur
-              fieldError(inputElement, message)//on appelle la fonction qui gère les erreurs sur les champs
-          }else{
-              drFieldGood(inputElement)
-          }
-      }
-      //on vérifie la validité de l'email
-      let emailValue = email.value.trim()
-      let emailRegExp = new RegExp("[a-z0-9_.-]+@[a-z0-9_.-]+\\.[a-z0-9_.-]+")
-      if (!emailRegExp.test(emailValue)){
-          let message = "Le format d'email renseigné n'est pas valide"
-          fieldError(email, message)
-      }else{
-        drFieldGood(email)
-      }
-      //on vérifie la validité du numéro de téléphone
-      let telephoneValue = telephone.value.trim()
-      let telephoneRegExp = new RegExp("[+0-9]")
-      if (!telephoneRegExp.test(telephoneValue)){
-          let message = "Le numéro de téléphone renseigné n'est pas valide"
-          fieldError(telephone, message)
-      }else{
-        drFieldGood(telephone)
+  event.preventDefault() // Bloque l'envoi du formulaire
+
+  if (validateFormContact()) {
+      this.submit() // Envoie le formulaire seulement si tout est valide
+  } 
+})
+
+/**
+* Fonction qui vérifie la validité des champs du formulaire
+*/
+function validateFormContact() {
+  let isValid = true
+
+  // Sélection des champs
+  const nom = document.getElementById('nom')
+  const prenom = document.getElementById('prenom')
+  const telephone = document.getElementById('telephone')
+  const email = document.getElementById('email')
+
+  let nomValue = nom.value.trim()
+  let prenomValue = prenom.value.trim()
+  let emailValue = email.value.trim()
+  let telephoneValue = telephone.value.trim()
+
+  // Effacer les erreurs précédentes
+  clearFieldError(nom)
+  clearFieldError(prenom)
+  clearFieldError(email)
+  clearFieldError(telephone)
+
+  if(nomValue === ''){
+      fieldError(nom, "Vous devez renseigner votre nom")
+      isValid = false
+  }
+
+  if(prenomValue === ''){
+      fieldError(prenom, "Vous devez renseigner votre prénom")
+      isValid = false
+  }
+
+  if(emailValue === ''){
+      fieldError(email, "Vous devez renseigner un email")
+      isValid = false
+  }
+
+  if(telephoneValue === ''){
+      fieldError(telephone, "Vous devez renseigner un numéro de téléphone")
+      isValid = false
+  }
+
+  // Vérification de l'email
+  if (emailValue !== "") {
+      let emailRegExp = /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i
+      if (!emailRegExp.test(emailValue)) {
+          fieldError(email, "Format email invalide")
+          isValid = false
+      } else {
+          clearFieldError(email)
       }
   }
-  
-  /**
-  * fonction qui renvoie le message d'erreur
-  * @param {string} elem 
-  * @param {string} message 
-  */
-  function fieldError (elem, message){
-  let formGroup = elem.parentElement
-  let small = formGroup.querySelector('small')
-  
-  //on ajoute le message d'erreur
-  small.innerText = message
-  
-  //on ajoute la classe error
-  formGroup.classList.add('error')
+
+  // Vérification du téléphone
+  if (telephoneValue !== "") {
+      let telephoneRegExp = /^\s*(?:\+?\d{1,3}[-.\s]?)?(0[1-9])(?:[-.\s]?\d{2}){4}\s*$/
+      if (!telephoneRegExp.test(telephoneValue)) {
+          fieldError(telephone, "Numéro de téléphone invalide")
+          isValid = false
+      } else {
+          clearFieldError(telephone)
+      }
   }
-  /**
-  /* fonction qui retire le message d'erreur
-  * @param {string} elem 
-  */
-  function drFieldGood (elem){
-  let formGroup = elem.parentElement
-  formGroup.classList.remove('error')
-  }
+
+  return isValid
+}
+
+/**
+ * Fonction qui affiche l'erreur directement dans l'input (placeholder)
+ * @param {HTMLElement} elem 
+ * @param {string} message 
+ */
+function fieldError(elem, message) {
+  elem.classList.add('error') // Ajoute la bordure rouge
+  elem.setAttribute("placeholder", message) // Affiche le message dans l'input
+  elem.value = "" // Efface la valeur incorrecte
+}
+
+/**
+* Fonction qui supprime l'erreur et restaure l'état normal du champ
+* @param {HTMLElement} elem 
+*/
+function clearFieldError(elem) {
+  elem.classList.remove('error') // Supprime la bordure rouge
+  elem.removeAttribute("placeholder") // Efface le message d'erreur
+}
