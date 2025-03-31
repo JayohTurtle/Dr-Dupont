@@ -42,9 +42,10 @@ body{
 .mb-50{
     margin-bottom: 50px;
 }
-h1, h2, h5, h3, h6{
+h1, h5{
     color:#A8D5BA;
 }
+
 
 /*Header*/
 .custom-container {
@@ -356,8 +357,11 @@ a{
 }
 
 .suppression{
+    color:#A8D5BA;
+}
 
-    color:red;
+.suppression:hover {
+    color: red;
 }
 
 

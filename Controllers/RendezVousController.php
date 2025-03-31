@@ -172,10 +172,13 @@ class RendezVousController{
             $dateRdvActuelle = $_POST["dateRdvActuelle"];
             $heureRdv = $_POST["heureRdv"];
     
-            $resultat = $this->rendezVousManager->mettreAJourRendezVous($idPatient, $dateRdvActuelle, $soin, $dateRdv, $heureRdv);
+            $success = $this->rendezVousManager->mettreAJourRendezVous($idPatient, $dateRdvActuelle, $soin, $dateRdv, $heureRdv);
             
-            echo json_encode(['status' => 'success']);
-   
+            echo json_encode([
+                "status" => $success ? "success" : "error",
+                "message" => $success ? "Rendez-vous modifié" : "Erreur lors de la modification"
+            ]);
+
             exit;
         }
     }
@@ -192,6 +195,21 @@ class RendezVousController{
             ]);
 
             }
+    }
+
+    public function supprimRendezVous(){
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $dateRdv = $_POST['dateRdvActuelle'];
+            $idPatient = $_POST['idPatient'];
+
+            $success = $this->rendezVousManager->supprimerRendezVous($dateRdv, $idPatient);
+
+            echo json_encode([
+                "status" => $success ? "success" : "error",
+                "message" => $success ? "Rendez-vous supprimé" : "Erreur lors de la suppression"
+            ]);
+
+        }
     }
 }
 

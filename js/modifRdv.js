@@ -113,61 +113,39 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
 })
-// 🔹 Événement sur le bouton d'ouverture du popup ajoutInteretCreche
-function modifRdvFormulaire() {
-    
-    //fermeture de la popup et envoi des données
-    const formModifRdv = document.getElementById("modifRdvForm")
-    
-    if (formModifRdv) {
-        formModifRdv.addEventListener("submit", function (e) {
-            e.preventDefault() // Empêcher le rechargement de la page par défaut
-        
-            // Récupérer les données du formulaire
-            let formData = new FormData(this)
-            console.log(formData)
-        
-            fetch("index.php?action=modifRendezVous", {
+function handleFormSubmission(formId, popupId, successMessage, actionUrl) {
+    const form = document.getElementById(formId);
+    if (!form) return;
+
+    form.addEventListener("submit", async function (e) {
+        e.preventDefault(); // Empêcher le rechargement
+
+        const formData = new FormData(this);
+
+        try {
+            const response = await fetch(actionUrl, {
                 method: "POST",
                 body: formData
-            })
-            .then(response => {
-                console.log("Réponse brute :", response)
-            
-                if (!response.ok) {
-                    throw new Error(`Erreur HTTP : ${response.status}`)
-                }
-                return response.text()  // 🔥 Récupérer la réponse brute
-            })
-            .then(text => {
-                console.log("Texte brut reçu :", text)
-            
-                try {
-                    let jsonData = JSON.parse(text)
-                    console.log("JSON parsé :", jsonData)
-                    return jsonData
-                } catch (error) {
-                    console.error("❌ Erreur de parsing JSON :", error)
-                    throw new Error("La réponse du serveur n'est pas un JSON valide : " + text)
-                }
-            })
-            .then(data => {
-                console.log("🟢 Réponse du serveur :", data) // Debug
-                if (data.status === "success") {
-                    fermerPopup("popupModifRendezVous")
-                    afficherMessageSucces("Rendez-vous modifié")
-                    window.location.reload(false)  // Rafraîchir la page
-                } else {
-                    console.error("❌ Erreur serveur :", data.message)
-                    afficherMessageErreur(data.message)
-                }
-            })
-            .catch(error => {
-                console.error("❌ Problème avec la requête fetch :", error)
-                afficherMessageErreur("Une erreur est survenue. Veuillez réessayer.")
-            })
-        })
-    }
+            });
+
+            const text = await response.text();
+            const data = JSON.parse(text);
+
+            if (!response.ok || data.status !== "success") {
+                throw new Error(data.message || `Erreur HTTP : ${response.status}`);
+            }
+
+            fermerPopup(popupId);
+            afficherMessageSucces(successMessage);
+            window.location.reload(false);
+        } catch (error) {
+            console.error("❌ Erreur :", error);
+            afficherMessageErreur(error.message || "Une erreur est survenue. Veuillez réessayer.");
+        }
+    });
 }
 
-modifRdvFormulaire()
+document.addEventListener("DOMContentLoaded", () => {
+    handleFormSubmission("modifRdvForm", "popupModifRendezVous", "Rendez-vous modifié", "index.php?action=modifRendezVous");
+    handleFormSubmission("supprimRdvForm", "popupSupprimRendezVous", "Rendez-vous supprimé", "index.php?action=supprimRendezVous");
+});

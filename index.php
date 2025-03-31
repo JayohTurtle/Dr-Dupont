@@ -41,6 +41,11 @@ spl_autoload_register(function ($class) {
             $controller -> modifRendezVous();
         break;
 
+        case 'supprimRendezVous':
+            $controller = new RendezVousController();
+            $controller -> supprimRendezVous();
+        break;
+
         case 'gestionActualites':
             $controller = new ActualitesController();
             $controller -> modifActualites();

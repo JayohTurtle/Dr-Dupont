@@ -189,9 +189,9 @@ class RendezVousManager extends AbstractEntityManager {
             ':dateRdvActuelle' => $dateRdvActuelle
         ];
     
-        $this->db->query($sql, $params);
+        $result = $this->db->query($sql, $params);
 
-        return true;
+        return $result !== false;
     }
 
     public function getRendezVousByDate($dateRdv) {
@@ -214,6 +214,15 @@ class RendezVousManager extends AbstractEntityManager {
         }
     
         return $rendezVousList;
-    }    
+    } 
+    
+    public function supprimerRendezVous($dateRdv, $idPatient) {
+        $sql = "DELETE FROM rendezvous WHERE dateRdv = :dateRdv AND idPatient = :idPatient";
+        $result = $this->db->query($sql, ['dateRdv' => $dateRdv, 'idPatient' => $idPatient]);
+    
+        return $result !== false;
+    }
+    
+    
 }
     
