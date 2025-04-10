@@ -3,9 +3,11 @@
 class UserConnectController{ 
     
     private $userManager;
+    private $horairesManager ;
 
     public function __construct() {
         $this->userManager = new UserManager();
+        $this->horairesManager = new HorairesManager();
     }
 
     public function showUserFormConnect() {
@@ -44,8 +46,11 @@ class UserConnectController{
 
     public function logout() {
         session_destroy();
+        $horaires = $this-> horairesManager -> getHoraires();
         $view = new View();
-        $view->render("accueil",[]);
+        $view->render("accueil",[
+            'horaires' => $horaires
+        ]);
         exit;
     }
 
