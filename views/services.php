@@ -1,11 +1,12 @@
+
 <div class = "row">
     <div class = "container mt-5">
         <div class="row d-flex">
-            <?php foreach ($actualites as $actualite): ?>
+            <?php foreach ($services as $service): ?>
                 <div class = "articles col-md-4 mb-3 actualite">
                     <div class="article">
-                        <h5> <?= ($actualite->getTitre()) ?></h5>
-                        <p> <?= ($actualite->getContenu()) ?> </p>
+                        <h5> <?= ($service->getService()) ?></h5>
+                        <p> <?= ($service->getDescription()) ?> </p>
                     </div>
                 </div>
             <?php endforeach; ?>

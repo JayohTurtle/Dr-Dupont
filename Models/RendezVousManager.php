@@ -45,14 +45,16 @@ class RendezVousManager extends AbstractEntityManager {
     
         // Calculer les 30 prochains jours
         $jours = [];
+        // Date de base une seule fois
+        $dateBase = new DateTime();
+
         for ($i = 0; $i < 30; $i++) {
-            $dateActuelle = new DateTime();
-            $dateActuelle->modify("+$i day");
-            $jourEnAnglais = $dateActuelle->format('l'); 
-            
-            // Si le jour est dans les jours valides
+            $dateActuelle = clone $dateBase;
+            $dateActuelle->modify("+$i days");
+
+            $jourEnAnglais = $dateActuelle->format('l');
             if (in_array($jourEnAnglais, $joursDispoEnAnglais)) {
-                $jours[] = $dateActuelle->format('Y-m-d');  // format YYYY-MM-DD
+                $jours[] = $dateActuelle->format('Y-m-d');
             }
         }
 
@@ -194,6 +196,24 @@ class RendezVousManager extends AbstractEntityManager {
         return $result !== false;
     }
 
+    public function mettreAJourRendezVousByIdRendezVous($idRdv, $soin, $dateRdv, $heureRdv) {
+
+        $sql = "UPDATE rendezvous
+                SET soin = :soin, dateRdv = :dateRdv, heureRdv = :heureRdv
+                WHERE idRdv = :idRdv";
+    
+        $params = [
+            ':soin' => $soin,
+            ':dateRdv' => $dateRdv,
+            ':heureRdv' => $heureRdv,
+            ':idRdv' => $idRdv,
+        ];
+    
+        $result = $this->db->query($sql, $params);
+
+        return $result !== false;
+    }
+
     public function getRendezVousByDate($dateRdv) {
         $sql = "SELECT r.*, p.nom, p.prenom 
                 FROM rendezvous r
@@ -222,7 +242,51 @@ class RendezVousManager extends AbstractEntityManager {
     
         return $result !== false;
     }
+
+    public function supprimerRendezVousByIdRendezVous($idRdv) {
+        $sql = "DELETE FROM rendezvous WHERE idRdv = :idRdv";
+        $result = $this->db->query($sql, ['idRdv' => $idRdv]);
     
+        return $result !== false;
+    }
+
+    public function getAllRendezVous(){
+
+        $sql = "SELECT r.*, p.nom, p.prenom 
+                FROM rendezvous r
+                JOIN patients p ON r.idPatient = p.idPatient
+                WHERE r.dateRdv >= CURDATE()
+                ORDER BY dateRdv ASC, heureRdv ASC";
     
+        $result = $this->db->query($sql);
+    
+        $rendezVousList = [];
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            $rendezVous = new RendezVous($row);
+    
+            $rendezVous->setNom($row['nom']);
+            $rendezVous->setPrenom($row['prenom']);
+    
+            $rendezVousList[] = $rendezVous;
+        }
+    
+        return $rendezVousList;
+    }
+
+    public function ajouterRendezVous($idPatient, $dateRdv, $heureRdv, $soin) {
+        $sql = "INSERT INTO rendezvous (idPatient, dateRdv, heureRdv, soin) 
+                VALUES (:idPatient, :dateRdv, :heureRdv, :soin)";
+    
+        $params = [
+            ':idPatient' => $idPatient,
+            ':dateRdv' => $dateRdv,
+            ':heureRdv' => $heureRdv,
+            ':soin' => $soin
+        ];
+    
+        $result = $this->db->query($sql, $params);
+    
+        return $result !== false;
+    }
 }
     

@@ -20,7 +20,7 @@ class ActualiteManager extends AbstractEntityManager {
 
     //Fonction pour insérer unactualité
     public function insertActualite(Actualite $actualite) {
-        $sql = 'INSERT INTO Actualites (titre, contenu) 
+        $sql = 'INSERT INTO actualites (titre, contenu) 
                 VALUES (:titre, :contenu)';
         $this->db->query($sql, [
             'titre' => $actualite->getTitre(),

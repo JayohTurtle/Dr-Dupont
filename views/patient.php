@@ -2,6 +2,7 @@
     <div class="container mt-5">
         <h4 class="text-center">Patient</h4>
         <div class="row d-flex mt-5">
+            <a class="ms-5 mb-3" href="index.php?action=admin"><- Retour</a>
             <div class="articles col-md-6">
                 <div class="article">
                     <h5><?= htmlspecialchars($patient->getPrenom()) ?> <?= htmlspecialchars($patient->getNom()) ?></h5>
@@ -33,9 +34,19 @@
                         ?>
                         <p><strong>Heure: </strong><?= htmlspecialchars($formattedTime) ?></p>
                         <p><strong>Soin: </strong><?= htmlspecialchars($prochainRendezVous->getSoin()) ?></p>
-                        <p><a href="#" onclick="ouvrirPopup('popupModifRendezVous')">Modifier le rendez-vous</a></p>
-                        <p><a href="#" onclick="ouvrirPopup('popupSupprimRendezVous')" class="suppression">Supprimer le rendez-vous</a></p>
+                        <p><a href="#" onclick="ouvrirPopup('popupModifRendezVous')">
+                                <img class="icon" src="assets/images/modifier.png" alt="Modifier">
+                            </a>
+                            <a href="#" onclick="ouvrirPopup('popupSupprimRendezVous')">
+                                <img class="icon" src="assets/images/supprimer.png" alt="Supprimer">
+                            </a>
+                        </p>
                     <?php endif; ?>
+                    <p>
+                        <a href="#" onclick="ouvrirPopup('popupAjoutRendezVous')">
+                            <img class="icon" src="assets/images/ajouter.png" alt="Ajouter">
+                        </a>
+                    </p>
                 </div>
             </div>
             <div class="articles col-md-6">
@@ -88,7 +99,7 @@
      <div id="popupModifRendezVous" class="modal">
         <div class="modal-content form-group d-flex flex-column align-items-center">
             <span class="close" onclick="fermerPopup('popupModifRendezVous')">&times;</span>
-            <h5>Choisir une date</h5>
+            <h5>Modifier le rendez-vous</h5>
             <form class = "article justify-content-center" method="POST" id="modifRdvForm">
                 <div class="d-flex mt-2 justify-content-center">
                     <div class="mb-3 mx-3">
@@ -122,23 +133,6 @@
                     <button type="submit" class="btn btn-primary small-button">Envoyer</button>
                 </div>
             </form>
-            <!-- Boîte modale pour choisir les horaires -->
-            <div id="popupChoixHoraires" class="modal" style="display: none;">
-                <div class="modal-content form-group d-flex flex-column align-items-center">
-                    <span class="close" onclick="fermerPopup('popupChoixHoraires')">&times;</span>
-                    <h3>Choisissez un horaire</h3>
-                    <form class = "article justify-content-center col-md-12" id="addChoixHoraireForm" method="POST">
-                        <div class="form-group col-md-12" id="inputAddChoixHoraire">
-                            <label for="addChoixHoraire">Horaires disponibles</label>
-                            <div id="horairesDisponibles"></div>
-                        </div>
-                        <input type="hidden" id="hiddenDate" name="hiddenDate">
-                        <div class="form-group col-md-3 d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary small-button" id="ajoutHoraire">Choisir</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
         </div>
     </div>
     <!-- Boîte modale pour supprimer le rendez-vous -->
@@ -157,6 +151,54 @@
                             <button type="submit" class="btn btn-danger small-button">Confirmer</button>
                         </div>
                     </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Boîte modale pour ajouter un rendez-vous -->
+    <div id="popupAjoutRendezVous" class="modal">
+        <div class="modal-content form-group d-flex flex-column align-items-center">
+            <span class="close" onclick="fermerPopup('popupAjoutRendezVous')">&times;</span>
+            <h5>Nouveau Rendez-vous</h5>
+            <form class = "article justify-content-center" method="POST" id="ajoutRdvForm">
+                <div class="d-flex mt-2 justify-content-center">
+                    <div class="mb-3 mx-3">
+                        <label>Date</label>
+                        <input type="date" class="form-control" id="newDatepicker" name="dateRdv" >
+                        <input type="hidden" name="idPatient" value="<?= (int) $patient->getIdPatient() ?>">
+                        <input type="hidden" id="hiddenTime" name="hiddenTime" value="<?= htmlspecialchars($hiddenTime) ?>">
+                    </div>
+                    <div>
+                        <label for="infoSoin">Soin</label>
+                        <select class="form-control" name="soin" id="infoSoin">
+                            <?php foreach ($soins as $soin) : ?>
+                                <option value="<?= htmlspecialchars($soin->getSoin()); ?>">
+                                    <?= htmlspecialchars($soin->getSoin()); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-12 d-flex justify-content-center mt-3">
+                    <button type="submit" class="btn btn-primary small-button">Envoyer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Boîte modale pour choisir un horaire -->
+    <div id="popupChoixHoraires" class="modal" style="display: none;">
+        <div class="modal-content form-group d-flex flex-column align-items-center">
+            <span class="close" onclick="fermerPopup('popupChoixHoraires')">&times;</span>
+            <h3>Choisissez un horaire</h3>
+            <form class="article justify-content-center col-md-12" id="addChoixHoraireForm" method="POST">
+                <div class="form-group col-md-12" id="inputAddChoixHoraire">
+                    <label for="addChoixHoraire">Horaires disponibles</label>
+                    <div id="horairesDisponibles"></div>
+                </div>
+                <input type="hidden" id="hiddenDate" name="hiddenDate">
+                <input type="hidden" id="sourceContext" value="">
+                <div class="form-group col-md-3 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary small-button" id="ajoutHoraire">Choisir</button>
                 </div>
             </form>
         </div>

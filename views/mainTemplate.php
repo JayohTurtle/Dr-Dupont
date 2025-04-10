@@ -30,13 +30,10 @@
                     <div class="navbar-cta mx-auto">
                         <ul>
                             <li class="nav-item">
-                                <a class="nav-link" href="index.php?action=admin">🔐 Administrateur</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="index.php?action=accueil">Accueil</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="index.php?action=soins">Soins</a>
+                                <a class="nav-link" href="index.php?action=services">Services</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="index.php?action=aPropos">A propos</a>
@@ -61,18 +58,13 @@
                         <p>Conditions générales d'utilisation</p>
                         <p>Mentions légales</p>
                         <p>Charte déontologique</p>
+                        <p><a href="index.php?action=connect" class="text-reset text-decoration-none" >Administration</a></p>
                     </div>
                 </div>
                 <div class="col-md-6 d-flex flex-column justify-content-between align-items-center">
                     <div class="contact">
-                        <div class="align-icon d-flex align-items-center mb-2">
-                            <img src="assets/images/localisation.png" alt="Icône de localisation" class="icon mr-2">
-                            <p class="mb-0">25 Rue Saint-Lô 76000 Rouen</p>
-                        </div>
-                        <div class="align-icon d-flex align-items-center">
-                            <img src="assets/images/telephone.png" alt="Icône de téléphone" class="icon mr-2">
-                            <p class="mb-0">02 33 44 55 66</p>
-                        </div>
+                        <p>25 Rue Saint-Lô 76000 Rouen</p>
+                        <p>02 33 44 55 66</p>
                     </div>
                 </div>
             </div>

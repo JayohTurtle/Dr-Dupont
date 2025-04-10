@@ -121,11 +121,11 @@ class RendezVousController{
         
         // Appel à la méthode getDates() du manager pour récupérer les jours valides
         $jours = $this->rendezVousManager->getJoursDispo();
-        
-        // Encodage des événements en JSON
+
+        error_log(print_r($jours, true));
+
         $json = json_encode($jours);
     
-        // Envoie des données JSON au client
         echo $json;
         exit;
     }
@@ -139,10 +139,9 @@ class RendezVousController{
         $rdvPris = $this->rendezVousManager->getAvailableHoraires($dateRdv);
 
         header("Content-Type: application/json");
-        // Encodage des événements en JSON
+
         $json = json_encode($rdvPris);
     
-        // Envoie des données JSON au client
         echo $json;
         exit;
         }
@@ -166,14 +165,19 @@ class RendezVousController{
     
     public function modifRendezVous(){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $idPatient = (int) $_POST["idPatient"];
-            $soin = $_POST["soin"];
-            $dateRdv = $_POST["dateRdv"];
-            $dateRdvActuelle = $_POST["dateRdvActuelle"];
-            $heureRdv = $_POST["heureRdv"];
+            $idPatient = isset($_POST["idPatient"]) ? (int) $_POST["idPatient"] : null;
+            $idRdv = isset($_POST["idRendezVous"]) ? (int) $_POST["idRendezVous"] : null;
+            $dateRdvActuelle = $_POST["dateRdvActuelle"] ?? null;
+            $soin = $_POST["soin"] ?? null;
+            $dateRdv = $_POST["dateRdv"] ?? null;
+            $heureRdv = $_POST["heureRdv"] ?? null;
+
+            if (!empty($idRdv)) {
+                $success = $this->rendezVousManager->mettreAJourRendezVousByIdRendezVous($idRdv, $soin, $dateRdv, $heureRdv);
+            } else {
+                $success = $this->rendezVousManager->mettreAJourRendezVous($idPatient, $dateRdvActuelle, $soin, $dateRdv, $heureRdv);
+            }
     
-            $success = $this->rendezVousManager->mettreAJourRendezVous($idPatient, $dateRdvActuelle, $soin, $dateRdv, $heureRdv);
-            
             echo json_encode([
                 "status" => $success ? "success" : "error",
                 "message" => $success ? "Rendez-vous modifié" : "Erreur lors de la modification"
@@ -184,29 +188,54 @@ class RendezVousController{
     }
 
     public function showRendezVous(){
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $dateRdv = $_POST['dateRdv'];
 
-            $rendezVousList = $this->rendezVousManager->getRendezVousByDate($dateRdv);
-
-            $view = new View();
-            $view->render("rendezVous", [
-                'rendezVousList' => $rendezVousList,
-            ]);
-
-            }
+        $rendezVousList = $this->rendezVousManager->getAllRendezVous();
+        $soins = $this->soinManager->getSoins();
+        
+        $view = new View();
+        $view->render("rendezVous", [
+            'rendezVousList' => $rendezVousList,
+            'soins' => $soins
+        ]);
     }
 
     public function supprimRendezVous(){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $dateRdv = $_POST['dateRdvActuelle'];
-            $idPatient = $_POST['idPatient'];
+            $idPatient = isset($_POST["idPatient"]) ? (int) $_POST["idPatient"] : null;
+            $idRdv = isset($_POST["idRendezVous"]) ? (int) $_POST["idRendezVous"] : null;
+            $dateRdvActuelle = $_POST["dateRdvActuelle"] ?? null;
 
-            $success = $this->rendezVousManager->supprimerRendezVous($dateRdv, $idPatient);
+            if (!empty($idRdv)) {
+                $success = $this->rendezVousManager->supprimerRendezVousByIdRendezVous($idRdv);
+            } else {
+                $success = $this->rendezVousManager->supprimerRendezVous($dateRdvActuelle, $idPatient);
+            }
+           
 
             echo json_encode([
                 "status" => $success ? "success" : "error",
                 "message" => $success ? "Rendez-vous supprimé" : "Erreur lors de la suppression"
+            ]);
+
+        }
+    }
+
+    public function ajoutRendezVous(){
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $idPatient = (int) $_POST["idPatient"];
+            $dateRdv = $_POST["dateRdv"];
+            $heureRdv = $_POST["hiddenTime"];
+            $soin = $_POST["soin"];
+
+            if (!empty($idPatient)) {
+                $success = $this->rendezVousManager->ajouterRendezVous($idPatient, $dateRdv, $heureRdv, $soin);
+            } else {
+                $success = false;
+            }
+
+            echo json_encode([
+                "status" => $success ? "success" : "error",
+                "message" => $success ? "Rendez-vous ajouté" : "Erreur lors de l'ajout"
             ]);
 
         }

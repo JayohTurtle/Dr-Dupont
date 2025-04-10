@@ -1,8 +1,8 @@
 <h5 class="text-center mt-25 p-3">Le cabinet du Dr Dupont, chirurgien-dentiste à Rouen, est heureux de vous accueillir sur son nouveau site Internet destiné à vous communiquer les meilleures informations de prévention et de santé bucco-dentaire.</h5>
-<div class="row justify-content-between mt-75">
+<div class="row justify-content-between mt-5">
     <article class="article-accueil text-center col-md-4">
-        <p class="mt-25">Horaires d'ouverture du cabinet</p>
-        <div>
+        <h5 class="mt-4">Horaires d'ouverture du cabinet</h5>
+        <div class="mt-4">
             <?php
             foreach ($horaires as $horaire) {
                 echo "<p><strong>{$horaire->getJour()} :</strong> ";
@@ -20,8 +20,7 @@
             ?>
         </div>
     </article>
-    </article>
-    <div class="col-md-4 text-center">
+    <div class="col-md-4 text-center img-accueil">
         <div class="mb-3">
             <img src="assets/images/ozkan-guner-YEx4RBK8Bdw-unsplash.png" class="photo-dr" alt="Le docteur Dupont dans son cabinet">
         </div>
@@ -30,8 +29,8 @@
         </div>
     </div>
     <article class="article-accueil text-center col-md-4">
-        <p class="mt-25">Expertise</p>
-        <ul class="mt-50 list-unstyled text-center">
+        <h5 class="mt-4">Expertise</h5>
+        <ul class="mt-4 list-unstyled text-center">
             <li>Abcès dentaire</li>
             <li>Consultation de chirurgie dentaire</li>
             <li>Implant dentaire</li>

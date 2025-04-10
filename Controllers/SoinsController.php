@@ -1,6 +1,4 @@
 <?php
-
-
 class SoinsController{
 
     private $soinManager;

@@ -15,9 +15,9 @@ $soin = isset($_SESSION['soin']) ? $_SESSION['soin'] : '';
 ?>
 
 <div class = "container">
-    <h5 class="text-center mt-25 p-3">Merci de remplir ce formulaire afin de prendre rendez-vous</h5>
+    <h5 class="text-center mt-2 p-3">Merci de remplir ce formulaire afin de prendre rendez-vous</h5>
 </div>
-<form action="index.php?action=creationRendezVous" method="post" class = "mb-50" id="form">
+<form action="index.php?action=creationRendezVous" method="post" class = "mb-3" id="form">
     <div class="form-container mt-5">
         <div class="row form-row mt-3">
             <div class="form-group col-md-6">
@@ -79,8 +79,8 @@ $soin = isset($_SESSION['soin']) ? $_SESSION['soin'] : '';
         <div class= "form-row mt-3 justify-content-center">
             <button type="submit" class="cta-appointment">Envoyer</button>
         </div>
-    </form>
-</div>
+    </div>
+</form>
 <script src="js/validate_form.js" defer></script>
 <script src="js/date_rdv.js" defer></script>
 

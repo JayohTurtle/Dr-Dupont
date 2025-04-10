@@ -1,27 +1,39 @@
 
 document.addEventListener("DOMContentLoaded", () => {
+
     const calendar = flatpickr("#datepicker", {
         locale: "fr",
         dateFormat: "Y-m-d",
         minDate: "today",
         disable: [],
-        onChange: (selectedDates, dateStr) => {
+        onChange: (selectedDates,dateStr, instance) => {
             ouvrirPopup("popupChoixHoraires")
             document.getElementById("hiddenDate").value = dateStr
             fetchHorairesDisponibles(dateStr)
         },
         onMonthChange: (selectedDates, dateStr, instance) => {
-            instance.set("disable", [])
-            loadAvailableDays(instance)
-        }
+            instance.set("disable", []); // <-- maintenant, c’est bien une instance Flatpickr
+            loadAvailableDays(instance);
+        }        
     })
 
     const loadAvailableDays = (instance) => {
         fetch("index.php?action=getJoursOuvert")
             .then(response => response.json())
             .then(data => {
-                const validDates = new Set(data.map(date => new Date(date).toISOString().split("T")[0]))
-                instance.set("disable", [(date) => !validDates.has(date.toISOString().split("T")[0])])
+                
+                const validDates = new Set(
+                    data.map(date => new Date(date).toISOString().split("T")[0])
+                );                
+    
+                instance.set("disable", [(date) => {
+                    const str = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+                    
+                    // Vérification si la date est dans la liste des validDates
+                    const isDisabled = !validDates.has(str)
+                    
+                    return isDisabled
+                }]);
             })
             .catch(console.error)
     }
@@ -70,6 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
             fermerPopup("popupChoixHoraires")
         }
     })
+    
 })
 
 

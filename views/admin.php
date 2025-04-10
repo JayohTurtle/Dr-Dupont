@@ -1,42 +1,62 @@
-<?php if (isset($successHoraires) && $successHoraires): ?>
-    <div id="success-message" style="color: green;">
-        ✅ Les horaires du <?= htmlspecialchars($jour) ?> ont bien été modifiés.
-    </div>
-<?php endif; ?>
+<?php
+$messages = [
+    'successAjoutSoin' => "Le nouveau Soin a bien été enregistré.",
+    'successModifSoin' => "Le Soin a bien été modifié.",
+    'successSupprimSoin' => "Le Soin a bien été supprimé.",
+    'successAjoutService' => "Le nouveau Service a bien été enregistré.",
+    'successModifService' => "Le Service a bien été modifié.",
+    'successSupprimService' => "Le Service a bien été supprimé.",
+    'successAjoutActualite' => "La nouvelle actualité a bien été enregistrée.",
+    'successModifActualite' => "L'actualité a bien été modifiée.",
+    'successSupprimActualite' => "L'actualité a bien été supprimée."
+];
 
-<?php if (isset($_GET['successAjoutSoin']) && $_GET['successAjoutSoin'] == 1): ?>
-    <div id="success-message" style="color: green;">
-        ✅ Le nouveau soin a bien été enregistré.
-    </div>
-<?php endif; ?>
-<?php if (isset($_GET['successModifSoin']) && $_GET['successModifSoin'] == 1): ?>
-    <div id="success-message" style="color: green;">
-        ✅ Le soin a bien été modifié.
-    </div>
-<?php endif; ?>
-<?php if (isset($_GET['successSupprimSoin']) && $_GET['successSupprimSoin'] == 1): ?>
-    <div id="success-message" style="color: green;">
-        ✅ Le soin a bien été supprimé.
-    </div>
-<?php endif; ?>
+if (isset($jour)) {
+    $messages['successHoraires'] = "Les horaires du " . htmlspecialchars($jour) . " ont bien été modifiés.";
+}
 
-<?php if (isset($_GET['successAjoutActualite']) && $_GET['successAjoutActualite'] == 1): ?>
-    <div id="success-message" style="color: green;">
-        ✅ La nouvelle actualite a bien été enregistrée.
+foreach ($messages as $key => $message) {
+    if (
+        ($key === 'successHoraires' && isset($successHoraires) && $successHoraires) ||
+        (isset($_GET[$key]) && $_GET[$key] == 1)
+    ) {
+        echo "<div id='success-message' style='color: green;'>$message</div>";
+    }
+}
+?>
+<?php if (isset($_SESSION['error'])): ?>
+    <div class="alert alert-danger text-center mt-3" id="error-message">
+        <?= htmlspecialchars($_SESSION['error']) ?>
     </div>
-<?php endif; ?>
-<?php if (isset($_GET['successModifActualite']) && $_GET['successModifActualite'] == 1): ?>
-    <div id="success-message" style="color: green;">
-        ✅ L'actualité a bien été modifiée.
-    </div>
-<?php endif; ?>
-<?php if (isset($_GET['successSupprimActualite']) && $_GET['successSupprimActualite'] == 1): ?>
-    <div id="success-message" style="color: green;">
-        ✅ L'actualité' a bien été supprimée.
-    </div>
+    <?php unset($_SESSION['error']); ?>
 <?php endif; ?>
 
 <div class="container">
+    <div class="d-flex justify-content-center">
+        <div class="article col-md-12 mb-4">
+            <h5 class="text-center">Utilisateur</h5>
+            <div class="d-flex">
+                <div class="col-md-6">
+                    <?php if (isset($_SESSION['userEmail'])): ?>
+                        <p><strong>Utilisateur : </strong><?= htmlspecialchars($_SESSION['userEmail'])?></p>
+                        <p><strong>Statut: </strong><?=htmlspecialchars($_SESSION['userRole'])?></p>
+                        <div><a href="index.php?action=gestionRdv" class="btn btn-primary">Rendez-vous</a></div> 
+                        <?php else: ?>
+                        <p>Utilisateur non connecté.</p>
+                    <?php endif; ?>
+                </div>
+                <div>
+                    
+                </div>
+                <div class="col-md-6 mt-2 d-flex flex-column align-items-end">
+                    <div><a href="index.php?action=logout" class="suppression">Déconnexion</a></div>  
+                    <?php if (isset($_SESSION['userRole']) && $_SESSION['userRole'] === 'Administrateur'): ?>
+                        <div class="mt-3"><a href="index.php?action=createUser">Nouvel utilisateur</a></div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class = "row mt-2">
         <div class="articles col-md-6">
             <form class = "article" id="formModifHoraires" method="POST" action="index.php?action=modifHoraires">
@@ -207,7 +227,7 @@
     </div>
     <div class = "row mt-3">
         <div class="articles col-md-6">
-            <form class = "article" id="formModifSoins" method="POST" action="index.php?action=modifSoins">
+            <form class = "article" id="getionSoinss" method="POST" action="index.php?action=modifSoins">
                 <h5 class="text-center">Soins</h5>
                 <div class="radio-group col-md-12">
                     <div class="d-flex justify-content-start">
@@ -225,33 +245,31 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group mt-2 col-md-8" id="inputAjouterSoin">
-                    <label for="soinAjout">Soin</label>
-                    <input type="text" class="form-control" id="soinAjout" name="soinAjout">
-                </div>
-                <div class="form-group d-none mt-2 col-md-8" id="inputModifierSoin">
-                    <label for="soinModif">Soin</label>
-                    <input type="text" class="form-control" id="soinModif" name="soinModif" list="getSoinsModif" autocomplete="off">
-                    <datalist id="getSoinsModif">
-                        <?php foreach ($soins as $soin) : ?>
-                            <option value="<?= htmlspecialchars($soin->getSoin()); ?>"
-                                data-id="<?= htmlspecialchars($soin->getIdSoin()); ?>">
-                            </option>
-                        <?php endforeach; ?>
-                    </datalist>
-                    <input type="hidden" name="idSoinModif" id="idSoinModif">
-                </div>
-                <div class="form-group d-none mt-2 col-md-8" id="inputSupprimerSoin">
-                    <label for="soinSupprim">Soin</label>
-                    <input type="text" class="form-control" id="soinSupprim" name="soinSupprim" list="getSoinsSupprim" autocomplete="off">
-                    <datalist id="getSoinsSupprim">
-                        <?php foreach ($soins as $soin) : ?>
-                            <option value="<?= htmlspecialchars($soin->getSoin()); ?>"
-                                data-id="<?= htmlspecialchars($soin->getIdSoin()); ?>">
-                            </option>
-                        <?php endforeach; ?>
-                    </datalist>
-                    <input type="hidden" name="idSoinSupprim" id="idSoinSupprim">
+                <div class="row mt-2 align-items-end">
+                    <div class="col-md-8">
+                        <div class="form-group" id="inputAjouterSoin">
+                            <label for="soinAjout">Soin</label>
+                            <input type="text" class="form-control" name="soinAjout" id="soinAjout" autocomplete="off">
+                        </div>
+                        <div class="form-group d-none" id="inputModifierSoin">
+                            <label for="soinModif">Soin</label>
+                            <input type="text" class="form-control" name="soinModif" id="soinModif" list="getSoinsModif" autocomplete="off">
+                            <datalist id="getSoinsModif">
+                            <?php foreach ($soins as $soin) : ?>
+                                <option value="<?= htmlspecialchars($soin->getSoin()); ?>"></option>
+                            <?php endforeach; ?>
+                            </datalist>
+                        </div>
+                        <div class="form-group d-none" id="inputSupprimerSoin">
+                            <label for="soinSupprim">Soin</label>
+                            <input type="text" class="form-control" name="soinSupprim" id="soinSupprim" list="getSoinsSupprim" autocomplete="off">
+                            <datalist id="getSoinsSupprim">
+                            <?php foreach ($soins as $soin) : ?>
+                                <option value="<?= htmlspecialchars($soin->getSoin()); ?>"></option>
+                            <?php endforeach; ?>
+                            </datalist>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <button type="submit" class="btn btn-primary mt-3">Envoyer</button>
@@ -314,23 +332,81 @@
             </form>
         </div>
     </div>
-    <div class="articles col-md-6 mt-3">
-        <form class = "article" id="formGestionRdv" method="POST" action="index.php?action=gestionRdv">
-            <h5 class="text-center">Rendez-vous</h5>
-            <h6>Recherche</h6>
-            <div class="row mt-2 align-items-end">
-                <div class="col-md-8">
-                    <div class="form-group" id="inputDateRdv">
-                        <label for="dateRdv">Date</label>
-                        <input type="date" class="form-control rdv-input" id="dateRdv" name="dateRdv">
+    <div class="row mt-2">
+        <div class="articles col-md-6 mt-3">
+            <form class = "article" id="formModifServices" method="POST" action="index.php?action=modifServices">
+                <h5 class="text-center">Services</h5>
+                <div class="radio-group col-md-12">
+                    <div class="d-flex justify-content-start">
+                        <div class="radio-item me-3">
+                            <input type="radio" id="ajouterService" name="serviceResearch" value="ajouterService" checked>
+                            <label for="ajouterService">Ajouter</label>
+                        </div>
+                        <div class="radio-item me-3">
+                            <input type="radio" id="modifierService" name="serviceResearch" value="modifierService">
+                            <label for="modifierService">Modifier</label>
+                        </div>
+                        <div class="radio-item me-3">
+                            <input type="radio" id="supprimerService" name="serviceResearch" value="supprimerService">
+                            <label for="supprimerService">Supprimer</label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div>
-                <button type="submit" class="btn btn-primary mt-3">Envoyer</button>
-            </div>
-        </form>
+                <div class="form-group mt-2 col-md-12" id="inputAjouterService">
+                    <div>
+                        <label for="serviceAjout">Service</label>
+                        <input type="text" class="form-control" id="serviceAjout" name="serviceAjout" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceAjout">Description</label>
+                        <textarea name="serviceAjout" id="serviceAjout" rows="6" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="form-group d-none mt-2 col-md-12" id="inputModifierService">
+                    <div>
+                        <label for="serviceModif">Service</label>
+                        <input type="text" class="form-control" id="serviceModif" name="serviceModif" list="getServicesModif" autocomplete="off">
+                        <datalist id="getServicesModif">
+                            <?php foreach ($services as $service) : ?>
+                                <option value="<?= htmlspecialchars($service->getService()); ?>"
+                                    data-contenu="<?= htmlspecialchars($service->getDescription()); ?>"
+                                    data-id="<?= htmlspecialchars($service->getIdService()); ?>">
+                                </option>
+                            <?php endforeach; ?>
+                        </datalist>
+                        <input type="hidden" name="idServiceModif" id="idServiceModif">
+                    </div>
+                    <div class="form-group">
+                        <label for="descriptionModif">Description</label>
+                        <textarea name="descriptionModif" id="descriptionModif" rows="6" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="form-group d-none mt-2 col-md-12" id="inputSupprimerService">
+                    <div>
+                        <label for="serviceSupprim">Service</label>
+                        <input type="text" class="form-control" id="serviceSupprim" name="serviceSupprim" list="getServicesSupprim" autocomplete="off">
+                        <datalist id="getServicesSupprim">
+                            <?php foreach ($services as $service) : ?>
+                                <option value="<?= htmlspecialchars($service->getService()); ?>"
+                                    data-contenu="<?= htmlspecialchars($service->getDescription()); ?>"
+                                    data-id="<?= htmlspecialchars($service->getIdService()); ?>">
+                                </option>
+                            <?php endforeach; ?>
+                        </datalist>
+                        <input type="hidden" name="idServiceSupprim" id="idServiceSupprim">
+                    </div>
+                    <div class="form-group">
+                        <label for="descriptionSupprim">Description</label>
+                        <textarea name="descriptionSupprim" id="descriptionSupprim" rows="6" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary mt-3">Envoyer</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
     
 <script src="js/admin.js" defer></script>
+<script src="js/errorCreateUser.js" defer></script>

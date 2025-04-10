@@ -21,15 +21,70 @@ spl_autoload_register(function ($class) {
     $controller = null;
 
     switch ($action){
+
         case 'accueil':
             $controller = new AccueilController();
             $controller -> showDaysList();
         break;
 
-        case 'admin':
-            $controller = new AdminController();
-            $controller -> showAdmin();
+        case 'connect':
+
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+
+            if (isset($_SESSION['user'])) {
+                header('Location: index.php?action=admin');
+                exit;
+            }
+
+            $controller = new UserConnectController();
+            $controller->showUserFormConnect();
         break;
+        
+        case 'changePassword':
+            $controller = new ChangePasswordController();
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $controller->changePassword();
+            } else {
+                $controller->showChangePasswordForm();
+            }
+        break;
+
+        case 'createUser':
+            if (isset($_SESSION['userRole']) && $_SESSION['userRole'] === 'Administrateur') {
+                $controller = new UserConnectController();
+                $controller->showCreateUser();
+            } else{
+                $_SESSION['error'] = "Accès refusé : droits insuffisants.";
+                header("Location: index.php?action=admin");
+                exit;
+            }
+        break;
+
+        case 'userCreated':
+            $controller = new UserConnectController();
+            $controller->userCreated();
+            break;
+
+        case 'login':
+            $controller = new UserConnectController();
+            $controller->login();
+            break;
+
+        case 'logout':
+            $controller = new UserConnectController();
+            $controller->logout();
+            break;
+
+        case 'admin':
+            if (!isset($_SESSION['user'])) {
+                header('Location: index.php?action=connect');
+                exit;
+            }
+            $controller = new AdminController();
+            $controller->showAdmin();
+            break;
 
         case 'modifHoraires':
             $controller = new HorairesController();
@@ -46,6 +101,11 @@ spl_autoload_register(function ($class) {
             $controller -> supprimRendezVous();
         break;
 
+        case 'ajoutRendezVous':
+            $controller = new RendezVousController();
+            $controller -> ajoutRendezVous();
+        break;
+
         case 'gestionActualites':
             $controller = new ActualitesController();
             $controller -> modifActualites();
@@ -54,9 +114,19 @@ spl_autoload_register(function ($class) {
             $controller = new PatientsController();
             $controller -> handlePatients();
 
-        case 'soins':
-            $controller = new SoinsController();
-            $controller -> showSoins();
+        case 'gestionRdv':
+            $controller = new RendezVousController();
+            $controller -> showRendezVous();
+        break;
+
+        case 'services':
+            $controller = new ServicesController();
+            $controller -> showServices();
+        break;
+
+        case 'modifServices':
+            $controller = new ServicesController();
+            $controller -> modifServices();
         break;
 
         case 'modifSoins':
@@ -110,13 +180,6 @@ spl_autoload_register(function ($class) {
             $controller = new PatientsController();
             $controller->handleConfirmationModificationPatient();
             break;
-
-        case 'gestionRdv':
-            $controller = new RendezVousController();
-            $controller -> showRendezVous();
-        break;
-
-        
 
         default:
 
