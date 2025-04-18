@@ -173,14 +173,16 @@ ul li::marker {
 .date-group{
     display: block;
 }
+
 .flatpickr-input {
     background-color: white !important;
     color: black;
 }
+
 .error{
     box-shadow: 0 0 5px red; /* Lueur rouge autour */
-    color: red;
 }
+
 #mapid { 
     height: 250px;
     width: 400px;

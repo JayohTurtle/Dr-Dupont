@@ -118,7 +118,10 @@ class PatientsController{
      /**
      * Fonction utilitaire pour nettoyer les entrées utilisateur.
      */
-    private function sanitizeInput($value) {
-        return !empty($value) ? trim(strip_tags($value)) : null;
-    }    
+    private function sanitizeInput($input) {
+        if (is_array($input)) {
+            return array_map([$this, 'sanitizeInput'], $input);
+        }
+        return trim(strip_tags($input)); // Supprime les balises HTML/PHP et les espaces
+    }   
 }

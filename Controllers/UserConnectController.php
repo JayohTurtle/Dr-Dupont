@@ -81,8 +81,8 @@ class UserConnectController{
      */
     private function sanitizeInput($input) {
         if (is_array($input)) {
-            return array_map([$this, 'sanitizeInput'], $input); // Nettoie les entrées dans les tableaux
+            return array_map([$this, 'sanitizeInput'], $input);
         }
-        return trim($input); // Supprime simplement les espaces inutiles
+        return trim(strip_tags($input)); // Supprime les balises HTML/PHP et les espaces
     }
 }

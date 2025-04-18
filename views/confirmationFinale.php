@@ -34,10 +34,10 @@
     <div class="mt-5 mb-5">
         <div class= "map-container">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div id="mapid"></div>
                 </div>
-                <div class="col-md-6 d-flex flex-column align-items-center justify-content-center">
+                <div class="col-md-7 d-flex flex-column align-items-center justify-content-center">
                     <h6>Les accès au cabinet</h6>
                     <p>Adresse : 25 Rue Saint-Lô 76000 Rouen</p>
                     <ul>

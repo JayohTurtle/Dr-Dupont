@@ -68,9 +68,10 @@ $soin = isset($_SESSION['soin']) ? $_SESSION['soin'] : '';
             <div class="form-group col-md-6">
                 <label for="soin">Soin</label>
                 <select class="form-control" name="soin" id="soin">
-                    <?php foreach ($soins as $soin) : ?>
-                        <option value="<?= htmlspecialchars($soin->getSoin()); ?>">
-                            <?= htmlspecialchars($soin->getSoin()); ?>
+                    <?php foreach ($soins as $soinOption) : ?>
+                        <option value="<?= htmlspecialchars($soinOption->getSoin()); ?>"
+                            <?= ($soinOption->getSoin() === $soin) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($soinOption->getSoin()); ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
