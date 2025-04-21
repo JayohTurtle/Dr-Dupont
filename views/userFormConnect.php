@@ -22,11 +22,7 @@
                     <label for="password" class="form-label fw-bold">Mot de passe</label>
                     <input type="password" class="form-control input-clean" id="password" name="password" required autocomplete="off">
                 </div>
-
                 <button type="submit" class="btn btn-secondary w-100">Se connecter</button>
-                <div class="text-center mt-3">
-                    <a href="index.php?action=forgotPassword" class="text-decoration-none linkMdp">Mot de passe oublié ?</a>
-                </div>
             </form>
         </div>
     </div>

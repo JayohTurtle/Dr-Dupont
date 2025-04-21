@@ -5,7 +5,9 @@
                 <div class = "articles col-md-4 mb-3 actualite">
                     <div class="article">
                         <h5> <?= ($actualite->getTitre()) ?></h5>
-                        <p> <?= ($actualite->getContenu()) ?> </p>
+                        <div class="contenu-article">
+                            <?= $actualite->getContenu() ?>
+                        </div>
                     </div>
                 </div>
             <?php endforeach; ?>

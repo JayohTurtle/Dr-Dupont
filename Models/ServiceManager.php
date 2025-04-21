@@ -6,10 +6,10 @@ class ServiceManager extends AbstractEntityManager {
 
     //Fonction pour insérer un service
     public function insertService(Service $service) {
-        $sql = 'INSERT INTO services (soin, description) 
-                VALUES (:soin, :description)';
+        $sql = 'INSERT INTO services (service, description) 
+                VALUES (:service, :description)';
         $this->db->query($sql, [
-            'soin' => $service->getService(),
+            'service' => $service->getService(),
             'description' => $service->getDescription(),
         ]);
 
@@ -48,5 +48,4 @@ class ServiceManager extends AbstractEntityManager {
     
         return $services;
     }
-    
 }

@@ -19,7 +19,7 @@ class ServicesController{
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-            $serviceAjout = $this->sanitizeInput($_POST['ServiceAjout'] ?? '');
+            $serviceAjout = $this->sanitizeInput($_POST['serviceAjout'] ?? '');
             $descriptionAjout = $this->sanitizeInput($_POST['descriptionAjout'] ?? '');
             $serviceModif = $this->sanitizeInput($_POST['serviceModif'] ?? '');
             $descriptionModif = $this->sanitizeInput($_POST['descriptionModif'] ?? '');
@@ -59,6 +59,6 @@ class ServicesController{
         if (is_array($input)) {
             return array_map([$this, 'sanitizeInput'], $input);
         }
-        return trim(strip_tags($input)); // Supprime les balises HTML/PHP et les espaces
+        return trim(strip_tags($input, '<ul><ol><li><strong><em><b><i><u><p><br><a><span><div><h1><h2><h3><h4><h5><h6>'));
     }
 }

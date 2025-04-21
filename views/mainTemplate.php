@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="https://www.tiny.cloud/css/codepen.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -33,7 +34,7 @@
                                 <a class="nav-link" href="index.php?action=accueil">Accueil</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="index.php?action=services">Services</a>
+                                <a class="nav-link" href="index.php?action=services">Soins</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="index.php?action=aPropos">A propos</a>
@@ -76,4 +77,5 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="https://cdn.tiny.cloud/1/vyvp6nro1jwhsxs6k52wk1n8kh0srp2xz2jteo6q0lsem0cv/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 </body>

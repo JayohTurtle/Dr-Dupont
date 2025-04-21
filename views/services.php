@@ -6,7 +6,9 @@
                 <div class = "articles col-md-4 mb-3 actualite">
                     <div class="article">
                         <h5> <?= ($service->getService()) ?></h5>
-                        <p> <?= ($service->getDescription()) ?> </p>
+                        <div class="contenu-article">
+                            <?= ($service->getDescription()) ?>
+                        </div>
                     </div>
                 </div>
             <?php endforeach; ?>

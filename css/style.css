@@ -206,16 +206,18 @@ ul li::marker {
 }
 
 /*Page actualités*/
-p, li {
+li {
     margin: 10px 0;
     line-height: 1.6;
 }
+
 .articles {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
 }
+
 .article {
     background: #252525;
     padding: 15px;
@@ -224,6 +226,31 @@ p, li {
     width: 100%;
     max-width: 600px;
 }
+
+/* Cibler le contenu HTML injecté depuis TinyMCE */
+.contenu-article p,
+.contenu-article ul,
+.contenu-article ol,
+.contenu-article li {
+    color: #E0E0E0;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.contenu-article ul,
+.contenu-article ol {
+    list-style-type: disc;
+    list-style-position: inside;
+    padding-left: 1.5rem;
+    margin: 1em 0;
+}
+
+.contenu-article li {
+    display: list-item;
+    margin-bottom: 0.5em;
+}
+
+
 /*page confirmation_rdv.php*/
 .cta-modif{
     background-color: #80FF80;
@@ -315,6 +342,8 @@ a{
     height: 24px;
     width: 24px;
 }
+
+
 /*Responsive*/
 
 /*Actualités et services*/

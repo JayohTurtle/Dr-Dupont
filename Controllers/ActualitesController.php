@@ -72,7 +72,8 @@ class ActualitesController{
         if (is_array($input)) {
             return array_map([$this, 'sanitizeInput'], $input);
         }
-        return trim(strip_tags($input)); // Supprime les balises HTML/PHP et les espaces
+        return trim(strip_tags($input, '<ul><ol><li><strong><em><b><i><u><p><br><a><span><div><h1><h2><h3><h4><h5><h6>'));
+
     }
     
 }
