@@ -231,24 +231,27 @@ foreach ($messages as $key => $message) {
                         </div>
                         <div class="form-group d-none" id="inputModifierSoin">
                             <label for="soinModif">Soin</label>
+                            <input type="hidden" name="idSoinModif" id="idSoinModif">
                             <input type="text" class="form-control" name="soinModif" id="soinModif" list="getSoinsModif" autocomplete="off">
                             <datalist id="getSoinsModif">
                             <?php foreach ($soins as $soin) : ?>
-                                <option value="<?= htmlspecialchars($soin->getSoin()); ?>"></option>
+                                <option value="<?= htmlspecialchars($soin->getSoin()); ?>" data-id="<?= $soin->getIdSoin(); ?>"></option>
                             <?php endforeach; ?>
                             </datalist>
                         </div>
                         <div class="form-group d-none" id="inputSupprimerSoin">
                             <label for="soinSupprim">Soin</label>
+                            <input type="hidden" name="idSoinSupprim" id="idSoinSupprim">
                             <input type="text" class="form-control" name="soinSupprim" id="soinSupprim" list="getSoinsSupprim" autocomplete="off">
                             <datalist id="getSoinsSupprim">
                             <?php foreach ($soins as $soin) : ?>
-                                <option value="<?= htmlspecialchars($soin->getSoin()); ?>"></option>
+                                <option value="<?= htmlspecialchars($soin->getSoin()); ?>" data-id="<?= $soin->getIdSoin(); ?>"></option>
                             <?php endforeach; ?>
                             </datalist>
                         </div>
                     </div>
                 </div>
+                
                 <div>
                     <button type="submit" class="btn btn-primary mt-3">Envoyer</button>
                 </div>
