@@ -333,7 +333,7 @@ foreach ($messages as $key => $message) {
                 <div class="row mt-2 align-items-end">
                     <div class="col-md-6 form-group">
                         <label class="me-3" for="ouvertureAm">Ouverture :</label>
-                        <select id="ouvertureAm" name="ouvertureAm" class="w-100">
+                        <select id="ouvertureAm" name="ouvertureAm" class="w-100 form-control">
                             <option value="0">Fermé</option>
                             <?php
                             $heure_debut = 7;
@@ -350,7 +350,7 @@ foreach ($messages as $key => $message) {
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="fermetureAm">Fermeture :</label>
-                        <select id="fermetureAm" name="fermetureAm" class="w-100">
+                        <select id="fermetureAm" name="fermetureAm" class="w-100 form-control">
                             <option value="0">Fermé</option>
                             <?php
                             $heure_debut = 7;
@@ -370,7 +370,7 @@ foreach ($messages as $key => $message) {
                 <div class="row mt-2 align-items-end">
                     <div class="col-md-6 form-group">
                         <label class="me-3" for="ouverturePm">Ouverture :</label>
-                        <select id="ouverturePm" name="ouverturePm" class="w-100">
+                        <select id="ouverturePm" name="ouverturePm" class="w-100 form-control">
                             <option value="0">Fermé</option>
                             <?php
                             $heure_debut = 13;
@@ -387,7 +387,7 @@ foreach ($messages as $key => $message) {
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="fermeturePm">Fermeture :</label>
-                        <select id="fermeturePm" name="fermeturePm" class="w-100">
+                        <select id="fermeturePm" name="fermeturePm" class="w-100 form-control">
                             <option value="0">Fermé</option>
                             <?php
                             $heure_debut = 13;
